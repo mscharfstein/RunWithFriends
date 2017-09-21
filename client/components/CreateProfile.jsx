@@ -1,20 +1,55 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import CreateProfileModal from './CreateProfileModal.jsx'
+import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import _ from 'lodash'
+import CreateProfileForm from './CreateProfileForm.jsx'
 
 /**
  * COMPONENT
  */
 export class CreateProfile extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+      open: true
+    }
+    this.close = this.close.bind(this)
+  }
+
   render() {
     return (
-      <div>
-        <h3>Welcome, {this.props.email}! To get started, create a profile with us and let us know your running preferences:</h3>
-        <CreateProfileModal />
-      </div>
+      <Modal open={this.state.open} closeIcon>
+      <Modal.Header>Create Your Profile!</Modal.Header>
+      <Modal.Content image scrolling>
+        <Image
+          size='medium'
+          src='/assets/images/wireframe/image.png'
+          wrapped
+        />
+
+        <CreateProfileForm />
+
+          {_.times(8, i => (
+            <Image
+              key={i}
+              src='/assets/images/wireframe/paragraph.png'
+              style={{ paddingBottom: 5 }}
+            />
+          ))}
+      </Modal.Content>
+      <Modal.Actions>
+        <Button primary onClick={this.close}>
+          Get Running! <Icon name='right chevron' />
+        </Button>
+      </Modal.Actions>
+    </Modal>
     )
+  }
+
+  close() {
+    this.setState({open: false})
   }
 }
 

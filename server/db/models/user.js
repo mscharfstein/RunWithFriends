@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
-const UserProfile = require('./userProfile')
+const Profile = require('./profile')
 
 const User = db.define('user', {
   email: {
@@ -26,11 +26,11 @@ const User = db.define('user', {
   }
 },{
   defaultScope: {
-    include: [{model: UserProfile}]
+    include: [{model: Profile}]
   }
 })
 
-module.exports = User
+module.exports = User;
 
 /**
  * instanceMethods

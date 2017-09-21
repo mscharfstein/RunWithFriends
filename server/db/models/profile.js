@@ -1,8 +1,11 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const UserProfile = db.define('userProfile', {
-  name: {
+const Profile = db.define('profile', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
     type: Sequelize.STRING
   },
   age: {
@@ -26,6 +29,12 @@ const UserProfile = db.define('userProfile', {
   prefSpeed: {
     type: Sequelize.FLOAT
   },
+  prefWeekdayTime: {
+    type: Sequelize.STRING
+  },
+  prefWeekendTime: {
+    type: Sequelize.STRING
+  },
   prefAge: {
     type: Sequelize.INTEGER
   },
@@ -34,4 +43,4 @@ const UserProfile = db.define('userProfile', {
   }
 })
 
-module.exports = UserProfile
+module.exports = Profile
