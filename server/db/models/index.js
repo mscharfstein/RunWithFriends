@@ -1,11 +1,17 @@
 const User = require('./user')
 const DatePref = require('./datePref')
 const Run = require('./run')
+const UserProfile = require('./userProfile')
 
 // associations
 User.belongsToMany(DatePref,{through: 'user_date_pref'})
 DatePref.belongsTo(User)
 
+// profile
+User.belongsTo(UserProfile)
+//UserProfile.belongsTo(User)
+
+// runs
 User.belongsToMany(User,{as: 'partner', through: Run})
 
 /**
@@ -16,6 +22,7 @@ User.belongsToMany(User,{as: 'partner', through: Run})
  */
 module.exports = {
   User,
+  UserProfile,
   DatePref,
   Run
 }

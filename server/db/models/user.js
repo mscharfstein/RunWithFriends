@@ -1,15 +1,9 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const UserProfile = require('./userProfile')
 
 const User = db.define('user', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  age: {
-    type: Sequelize.INTEGER
-  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -29,27 +23,10 @@ const User = db.define('user', {
   },
   profilePic: {
     type: Sequelize.STRING
-  },
-  phone: {
-    type: Sequelize.STRING
-  },
-  city: {
-    type: Sequelize.STRING
-  },
-  prefNeighborhoods: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  prefDist: {
-    type: Sequelize.FLOAT
-  },
-  prefSpeed: {
-    type: Sequelize.FLOAT
-  },
-  prefAge: {
-    type: Sequelize.INTEGER
-  },
-  prefGender: {
-    type: Sequelize.STRING
+  }
+},{
+  defaultScope: {
+    include: [{model: UserProfile}]
   }
 })
 
