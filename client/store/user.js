@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const SET_PROFILE = 'SET_PROFILE'
 
 /**
  * INITIAL STATE
@@ -15,8 +16,9 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getUser = user => ({ type: GET_USER, user })
+const removeUser = () => ({ type: REMOVE_USER })
+const setProfile = profile => ({ type: SET_PROFILE, profile })
 
 /**
  * THUNK CREATORS
@@ -36,7 +38,7 @@ export const auth = (email, password, method) =>
         history.push('/home')
       })
       .catch(error =>
-        dispatch(getUser({error})))
+        dispatch(getUser({ error })))
 
 export const logout = () =>
   dispatch =>
@@ -47,6 +49,16 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
+export function updateProfile(userId) {
+  return function thunk(dispatch) {
+    return axios.get(`/api/profile/${user.id}`)
+      .then(res => res.data)
+      .then(user => {
+        dispatch(setProfile(user));
+      })
+  }
+}
+
 /**
  * REDUCER
  */
@@ -56,6 +68,8 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case SET_PROFILE:
+      return action.user
     default:
       return state
   }

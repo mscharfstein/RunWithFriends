@@ -30,4 +30,34 @@ describe('User routes', () => {
         })
     })
   }) // end describe('/api/users')
+
+  describe('/api/users/:userId', () => {
+
+    beforeEach(() => {
+      return User.create({
+        id: 10,
+        email: codysEmail
+      })
+    })
+
+    it('POST api/users/:userId', () => {
+      return request(app)
+        .post('/api/users/:userId', {
+          firstName: 'Michelle',
+          lastName: 'Scharfstein',
+          city: 'New York City',
+          prefNeighborhoods: ['Williamsburg'],
+          prefDistance: '3',
+          prefSpeed: '9-10',
+          prefWeekdayTime: 'Morning',
+          prefWeekendTime: 'Afternoon'
+        })
+        .expect(201)
+        .then(res => {
+          expect(res.body).to.be.an('object')
+          expect(res.body.prefNeighborhoods = ['Williamsburg'])
+        })
+    })
+
+  })
 }) // end describe('User routes')

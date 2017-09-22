@@ -1,12 +1,18 @@
 const User = require('./user')
-const DatePref = require('./datePref')
 const Run = require('./run')
+const Profile = require('./profile')
+const Neighborhood = require('./neighborhood')
+const City = require('./city')
 
 // associations
-User.belongsToMany(DatePref,{through: 'user_date_pref'})
-DatePref.belongsTo(User)
+// profile
+User.belongsTo(Profile)
 
+// runs
 User.belongsToMany(User,{as: 'partner', through: Run})
+
+// cities
+City.belongsToMany(Neighborhood, {through: 'city_neighborhoods'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -16,6 +22,8 @@ User.belongsToMany(User,{as: 'partner', through: Run})
  */
 module.exports = {
   User,
-  DatePref,
-  Run
+  Profile,
+  Run,
+  City,
+  Neighborhood
 }

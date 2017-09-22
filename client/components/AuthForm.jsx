@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import FacebookLoginComp from './Facebook-Login.js'
+import FacebookLoginComp from './FacebookLogin.jsx'
 /**
  * COMPONENT
  */
