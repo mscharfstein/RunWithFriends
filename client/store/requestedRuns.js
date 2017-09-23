@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {setIncomingReq} from './incomingRequests'
+import {setIncomingReq} from '../store'
 
 /**
  * ACTION TYPES
@@ -25,9 +25,9 @@ return function thunk(dispatch) {
   }
 }
 
-export function addBuddyToRunRequest(profileId, partnerId) {
+export function addBuddyToRunRequest(runId, partnerId, partnerPhone) {
   return function thunk(dispatch) {
-    return axios.put('/api/requestedRuns', {profileId, partnerId})
+    return axios.put('/api/requestedRuns', {runId, partnerId, partnerPhone})
       .then(res => res.data)
       .then(run => {
         dispatch(setReqRun(run));
@@ -44,6 +44,11 @@ export function deleteRequest(runId) {
       }
     }
 
+export function text(number, content) {
+  return function thunk(dispatch) {
+    return axios.post('/api/text',{number, content})
+  }
+}
 /**
  * REDUCER
  */

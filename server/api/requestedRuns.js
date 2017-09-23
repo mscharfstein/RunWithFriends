@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const { Profile, Run, RequestedRun } = require('../db/models')
+const sendText = require('../sendText')
 module.exports = router
 
 router.post('/', (req, res, next) => {
-  console.log('in requested run route', req.body)
   RequestedRun.create({
     dist: +req.body.prefDist,
     speed: req.body.prefSpeed,
@@ -17,27 +17,23 @@ router.post('/', (req, res, next) => {
 })
 
 router.put('/', (req, res, next) => {
-  console.log('in update req run route, req.body', req.body)
     RequestedRun.update(
       {requestedPartnerId: req.body.partnerId},
       {where: {
-        profileId: req.body.profileId
+        id: req.body.runId
       }}
     )
       .then(() => {
-        return RequestedRun.findOne({
-          where: {
-            profileId: req.body.profileId,
-            requestedPartnerId: req.body.partnerId
-          }
-        })
+        return RequestedRun.findById(req.body.runId)
       })
-      .then(run => res.json(run))
+      .then(run => {
+        sendText(req.body.partnerPhone, "You have a new run request on Run With Friends! Log in to get running!")
+        res.json(run)
+      })
       .catch(next)
   })
 
   router.delete('/:runId', (req, res, next) => {
-    console.log('in delete req run route, req.body', req.body)
       RequestedRun.destroy(
         {where: {
           id: req.params.runId

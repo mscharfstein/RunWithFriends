@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Grid, Container, Menu} from 'semantic-ui-react'
 import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns} from './index'
-import {fetchRequests} from '../store'
+import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns} from './index'
+import {fetchRequests, fetchPastRuns} from '../store'
 /**
  * COMPONENT
  */
@@ -12,7 +12,7 @@ import {fetchRequests} from '../store'
 export class UserHome extends Component {
 
   componentDidMount() {
-    this.props.getRequests(this.props.user.profileId)
+    this.props.loadInitialData(this.props.user.profileId)
   }
 
   render() {
@@ -24,7 +24,7 @@ export class UserHome extends Component {
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>
-
+          <PastRuns />
         </Grid.Column>
         <Grid.Column width={6} className='nurse-column'>
           <RequestBuddyForm />
@@ -42,14 +42,17 @@ const mapState = (state) => {
   return {
     email: state.user.email,
     user: state.user,
-    incomingRequests: state.incomingRequests
+    incomingRequests: state.incomingRequests,
+    upcomingRun: state.upcomingRun,
+    pastRuns: state.pastRuns
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    getRequests(profileId) {
+    loadInitialData(profileId) {
       dispatch(fetchRequests(profileId))
+      dispatch(fetchPastRuns(profileId))
     }
   }
 }

@@ -12,14 +12,14 @@ export class RequestBuddyForm extends Component {
     super(props)
     // maintain local state for input while writing
     this.state = {
-      city: 'New York City',
+      city: '',
       neighborhoods: [],
-      prefNeighborhood: 'East Village',
-      prefDist: this.props.profile.prefDist,
-      prefSpeed: '7:30',
-      time: '6:45',
+      prefNeighborhood: '',
+      prefDist: +this.props.profile.prefDist,
+      prefSpeed: '',
+      time: '',
       AMPM: 'AM',
-      date: '9/23/2018'
+      date: ''
     }
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.getCityDropdown = this.getCityDropdown.bind(this);

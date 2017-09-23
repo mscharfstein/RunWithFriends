@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRuns } from '../store';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import  Run from './Run';
 import { Button, Card, Header, Image, Grid } from 'semantic-ui-react';
 
 
-class BrowseRuns extends Component {
-  componentDidMount() {
-     this.props.loadRuns();
-  }
-
-  renderRuns() {
-    return _.map(_.filter(this.props.runs,'city', 'New York City'), run=>{
-    //return _.map(this.props.patients, patient=>{
-      return <Run key={run.id} />
-    });
-  }
+class PastRuns extends Component {
 
   render() {
     return (
       <div>
-        <Header as='h3' textAlign='center'>Runs</Header>
+        <Header as='h3' textAlign='center'>Your Past Runs</Header>
+        {this.props.pastRuns.length &&
         <Card.Group itemsPerRow='2'>
-          {this.renderRuns()}
+          {_.map(this.props.pastRuns, run => {
+            return <Run key={run.id} run={run}/>
+          })}
         </Card.Group>
+        }
+        {
+          this.props.pastRuns.length === 0 ? "You haven't gone on any runs yet. Request a running buddy to experience Run With Friends for the first time!" : ''
+        }
       </div>
     );
   }
 }
+
 function mapStatetoProps(state){
   return {
-    pastRuns: state.pastRuns,
-    city: state.user.profile.prefCity
+    pastRuns: state.pastRuns
   }
 }
 
@@ -47,4 +43,4 @@ function mapDispatchToProps(dispatch) {
 
 
 //wires up fetchNurses to be a prop as action creator for component
-export default connect(mapStatetoProps, mapDispatchToProps)(BrowseRuns);
+export default connect(mapStatetoProps, mapDispatchToProps)(PastRuns);

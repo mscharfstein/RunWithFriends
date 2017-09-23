@@ -17,7 +17,8 @@ export class CreateProfileForm extends Component {
       prefDist: '',
       prefSpeed: '',
       prefWeekdayTime: [],
-      prefWeekendTime: []
+      prefWeekendTime: [],
+      phone: ''
     }
     this.getCityDropdown = this.getCityDropdown.bind(this);
     this.getMilesDropdown = this.getMilesDropdown.bind(this);
@@ -34,6 +35,7 @@ export class CreateProfileForm extends Component {
     this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
     this.handleChangeWeekdayTimes = this.handleChangeWeekdayTimes.bind(this);
     this.handleChangeWeekendTimes = this.handleChangeWeekendTimes.bind(this);
+    this.handleChangePhone = this.handleChangePhone.bind(this);
   }
 
   render() {
@@ -50,6 +52,7 @@ export class CreateProfileForm extends Component {
         <Form.Field required control={Input} label='First Name' placeholder='First Name' onChange={this.handleChangeFirstName}/>
         <Form.Field required control={Input} label='Last Name' placeholder='Last Name' onChange={this.handleChangeLastName}/>
         <Form.Field control={Input} label='Age' placeholder='25' onChange={this.handleChangeAge} />
+        <Form.Field required control={Input} label='Phone Number' placeholder='+12161234567' onChange={this.handleChangePhone} />
         <br>
         </br>
 
@@ -167,6 +170,10 @@ export class CreateProfileForm extends Component {
     this.setState({ prefWeekendTime: data.value })
   }
 
+  handleChangePhone(evt, data) {
+    this.setState({ phone: data.value })
+  }
+
 }
 
 const mapState = (state) => {
@@ -179,7 +186,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt, data, user) {
-      console.log('data',data)
       dispatch(updateProfile(data, user))
     }
   }

@@ -16,12 +16,13 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
-function getTime(dist, speed) {
-  const lengthOfTime = speed.split(":")
-  const min = lengthOfTime[0]
-  const sec = lengthOfTime[1]
-  const partialMin = +sec/60
-  const totalMin = +min + partialMin
-
-  return dist / totalMin
-}
+router.get('/history/:profileId', (req, res, next) => {
+  Run.findAll({
+    where: {
+      $or: [{profileId: req.params.profileId},{partnerId: req.params.profileId}],
+      status: "Completed"
+    }
+  })
+    .then(runs => res.json(runs))
+    .catch(next)
+})

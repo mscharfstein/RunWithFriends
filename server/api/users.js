@@ -14,9 +14,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:userId', (req, res, next) => {
-  console.log('in route')
   const findUserPromise = User.findById(req.params.userId)
-  console.log('req.body', req.body)
   const createProfPromise = Profile.create(req.body)
 
   return Promise.all([findUserPromise, createProfPromise])

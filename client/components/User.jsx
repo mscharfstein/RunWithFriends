@@ -12,7 +12,6 @@ class User extends Component {
 
   render() {
     console.log('props', this.props)
-    const colors = ['red', 'blue']
     return (
         <Card fluid className='patient-card'>
           <Card.Content>
@@ -33,7 +32,7 @@ class User extends Component {
                 Distance: {this.props.buddy.prefDist}
               </div>
              <div className='request-run-button'>
-                <Button size='mini' color='green' onClick={(evt) => this.props.chooseBuddy(evt, this.props.requester.profileId, this.props.buddy.id)}>Join Me?</Button>
+                <Button size='mini' color='green' onClick={(evt) => this.props.chooseBuddy(evt, this.props.requestedRun, this.props.buddy)}>Join Me?</Button>
               </div>
             </Card.Description>
           </Card.Content>
@@ -52,10 +51,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    chooseBuddy(evt, profileId, partnerId) {
+    chooseBuddy(evt, run, buddy) {
       // pass in only what needed
-      console.log('handle submit', profileId, partnerId)
-      dispatch(addBuddyToRunRequest(profileId, partnerId))
+      dispatch(addBuddyToRunRequest(run.id, buddy.id, buddy.phone))
       history.push('/home')
     }
   }

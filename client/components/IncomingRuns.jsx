@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Card, Dropdown, Grid, Icon, Image, Label, List, Statistic} from 'semantic-ui-react'
 import _ from 'lodash';
 import history from '../history'
-import {addBuddyToRunRequest, createRun, deleteRequest, setIncomingReq} from '../store'
+import {addBuddyToRunRequest, createRun, deleteRequest, setIncomingReq, text} from '../store'
 
 class IncomingRuns extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class IncomingRuns extends Component {
         Desired Time: {new Date(this.props.run.date).toDateString()}, {this.props.run.time}
         </div>
         <Button onClick={(evt)=>this.props.handleAccept(evt, this.props.run)}>Accept!</Button>
-        <Button onClick={this.props.handleDecline}>Sorry, can't make it</Button>
+        <Button onClick={(evt)=>this.props.handleDecline(evt, this.props.run)}>Sorry, can't make it</Button>
       </div>
     );
   }
@@ -51,14 +51,17 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleAccept(evt, run) {
+      console.log('run.profile.phone', run.profile, run.profile.phone)
       dispatch(deleteRequest(run.id))
       dispatch(setIncomingReq([]))
       dispatch(createRun(run))
+      dispatch(text(run.profile.phone, "Let's get running, see you soon!"))
       history.push('/home')
     },
-    handleDecline(evt) {
-      dispatch(deleteRequest(run))
+    handleDecline(evt, run) {
+      dispatch(deleteRequest(run.id))
       dispatch(setIncomingReq([]))
+      dispatch(text(run.profile.phone, "Sorry, I can't make it"))
       history.push('/home')
     }
   }
