@@ -11,7 +11,7 @@ User.belongsTo(Profile)
 //Profile.belongsTo(User)
 
 // runs
-Profile.belongsToMany(Profile,{as: 'partner', through: Run})
+Profile.belongsToMany(Profile,{as: 'partner', through: Run, unique: false})
 RequestedRun.belongsTo(Profile)
 
 // cities

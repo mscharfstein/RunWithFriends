@@ -17,9 +17,9 @@ export class RequestBuddyForm extends Component {
       prefNeighborhood: 'East Village',
       prefDist: this.props.profile.prefDist,
       prefSpeed: '7:30',
-      day: new Date().getDay(),
       time: '6:45',
-      AMPM: 'AM'
+      AMPM: 'AM',
+      date: '9/23/2018'
     }
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.getCityDropdown = this.getCityDropdown.bind(this);
@@ -27,10 +27,10 @@ export class RequestBuddyForm extends Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeNeigh = this.handleChangeNeigh.bind(this);
     this.handleChangeAMPM = this.handleChangeAMPM.bind(this);
-    this.handleChangeDay = this.handleChangeDay.bind(this);
     this.handleChangeTime = this.handleChangeTime.bind(this);
     this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
     this.handleChangeMiles = this.handleChangeMiles.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this)
   }
 
   render() {
@@ -55,9 +55,7 @@ export class RequestBuddyForm extends Component {
 
         <h4>When you are going?</h4>
         {/*add calendar api?*/}
-        <Form.Field>
-
-        </Form.Field>
+        <Form.Field control={Input} label="Date" placeholder="9/24/2018" onChange={this.handleChangeDate} />
         <Form.Field control={Input} label="Time" placeholder="7:45" onChange={this.handleChangeTime} />
         <Form.Field control={Dropdown} value="AM" selectOnBlur={false} options={[{key: "AM", value: "AM", text: "AM"},{key: "PM", value: "PM", text: "PM"}]} onChange={this.handleChangeAMPM} />
         <br>
@@ -95,10 +93,6 @@ export class RequestBuddyForm extends Component {
     this.setState({ prefNeighborhood: data.value })
   }
 
-  handleChangeDay(evt, data) {
-    this.setState({ day: data.value })
-  }
-
   handleChangeTime(evt, data) {
     this.setState({ time: data.value })
   }
@@ -113,6 +107,10 @@ export class RequestBuddyForm extends Component {
 
   handleChangeSpeed(evt, data) {
     this.setState({ prefSpeed: data.value})
+  }
+
+  handleChangeDate(evt, data) {
+    this.setState({ date: new Date(data.value)})
   }
 }
 

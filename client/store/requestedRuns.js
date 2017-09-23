@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {setIncomingReq} from './incomingRequests'
 
 /**
  * ACTION TYPES
@@ -33,6 +34,15 @@ export function addBuddyToRunRequest(profileId, partnerId) {
       })
     }
   }
+
+export function deleteRequest(runId) {
+    return function thunk(dispatch) {
+      return axios.delete(`/api/requestedRuns/${runId}`)
+        .then(() => {
+          dispatch(setIncomingReq([]));
+        })
+      }
+    }
 
 /**
  * REDUCER

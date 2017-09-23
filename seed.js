@@ -8,7 +8,7 @@ const City = db.models.city;
 const Neighborhood = db.models.neighborhood
 
 const users = [
-  {name: 'Michelle Scharfstein', age: 25, email: 'michelle.scharfstein@gmail.com', password: 'GraceHopper!', phone: 2168700516, city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: 9, prefAge: 25, prefGender: 'either'},
+  {name: 'Michelle Scharfstein', age: 25, email: 'gracehopper@gmail.com', password: 'gracehopper', phone: '2168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: 9, prefAge: 25, prefGender: 'either'},
   {name: 'Julia Scharfstein', age: 21, email: 'jscharf614@gmail.com', password: 'password', phone: '2168709580', city: 'New York City', prefNeighborhoods: ['Lower East Side', 'Williamsburg'], prefDist: 3.5, prefSpeed: 10, prefGender: 'either'},
 ]
 

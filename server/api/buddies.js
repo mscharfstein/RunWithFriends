@@ -7,7 +7,8 @@ router.put('/find', (req, res, next) => {
 
   console.log('in find buddies route')
   let typeOfDay = 'prefWeekdayTime';
-  if (req.body.day === 0 || req.body.day === 6) typeOfDay = 'prefWeekendTime';
+  let runDate = new Date(req.body.date)
+  if (runDate.getDay() === 0 || runDate.getDay() === 6) typeOfDay = 'prefWeekendTime';
 
   const time = findTime(req.body.time, req.body.AMPM)
   const speedInt = findSpeedInterval(req.body.prefSpeed)

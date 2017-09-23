@@ -20,7 +20,7 @@ export class UserHome extends Component {
     return (
       <Container fluid>
       {this.props.incomingRequests.length &&
-          <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns request={this.props.incomingRequests}/>} />
+          <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>
