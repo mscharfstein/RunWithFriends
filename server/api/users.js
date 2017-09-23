@@ -14,15 +14,22 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:userId', (req, res, next) => {
+  console.log('in route')
   const findUserPromise = User.findById(req.params.userId)
+  console.log('req.body', req.body)
   const createProfPromise = Profile.create(req.body)
 
-  Promise.all([findUserPromise, createProfPromise])
+  return Promise.all([findUserPromise, createProfPromise])
     .then(promises => {
       const user = promises[0]
       const profile = promises[1]
-      user.setProfile(profile)
-        .then(user => res.json(user))
+      return user.setProfile(profile)
+        .then(user => {
+          return User.findById(user.id)
+          .then(updatedUser => {
+            res.json(updatedUser)
+          })
+        })
     })
     .catch(next)
 })

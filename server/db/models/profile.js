@@ -27,13 +27,13 @@ const Profile = db.define('profile', {
     type: Sequelize.FLOAT
   },
   prefSpeed: {
-    type: Sequelize.FLOAT
+    type: Sequelize.STRING
   },
   prefWeekdayTime: {
-    type: Sequelize.STRING
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
   prefWeekendTime: {
-    type: Sequelize.STRING
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
   prefAge: {
     type: Sequelize.INTEGER

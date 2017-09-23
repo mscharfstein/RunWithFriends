@@ -5,5 +5,12 @@
  */
 export {default as Main} from './Main.jsx'
 export {default as UserHome} from './UserHome.jsx'
-export {Login, Signup} from './AuthForm.jsx'
+//export {Login, Signup} from './AuthForm.jsx'
 export {default as CreateProfile} from './CreateProfile.jsx'
+export {default as SideBarNav} from './SideBarNav.jsx'
+export {default as Login} from './Login.jsx'
+export {default as RequestBuddy} from './RequestBuddy.jsx'
+export {default as RequestBuddyForm} from './RequestBuddyForm.jsx'
+export {default as Run} from './Run'
+export {default as BrowseRuns} from './BrowseRuns'
+export {default as Buddies} from './Buddies'

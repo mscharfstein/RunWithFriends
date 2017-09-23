@@ -1,0 +1,73 @@
+.nav-bar {
+  height: 50px;
+}
+.nav-bar img {
+  margin-right: 15px !important;
+}
+.main-grid {
+  position: absolute;
+  height: 100%;
+}
+.login-container {
+  background: #eff8fb;
+  height: 100%;
+  position: fixed;
+  padding-top: 50px;
+}
+
+/*Columns*/
+.patient-column {
+  background-color: #eff8fb;
+}
+.patient-column, .nurse-column {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1em 2em !important;
+}
+
+/*Summary Bar*/
+.summary-bar {
+  background-color: #435461 !important;
+}
+
+/*Patient*/
+.patient-card {
+  padding: 1em !important;
+}
+.patient-card .content {
+  padding: 0px !important;
+  position: relative;
+}
+.patient-card .content .description {
+  margin-bottom: 30px;
+}
+.patient-card .content .dropdown {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.patient-card .acuity-rating {
+  text-align: center;
+}
+.patient-card .acuity-rating .label-text {
+  font-size: 0.5em;
+}
+
+.drop-down-badchoice{
+  color:#c5c1c1 !important;
+}
+
+/*Nurse*/
+.nurse-card h3 {
+  margin-bottom: 5px;
+}
+.nurse-card .list.horizontal {
+  margin-top: 5px;
+}
+.nurse-card .circular.label {
+  margin-right: 20px;
+}
+.nurse-card .labels {
+  display: inline-block;
+  float: right;
+}

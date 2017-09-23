@@ -18,7 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
-const setProfile = profile => ({ type: SET_PROFILE, profile })
+const setProfile = user => ({ type: SET_PROFILE, user })
 
 /**
  * THUNK CREATORS
@@ -44,16 +44,18 @@ export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
       .then(res => {
+        console.log('removing user')
         dispatch(removeUser())
         history.push('/login')
       })
       .catch(err => console.log(err))
 
-export function updateProfile(userId) {
+export function updateProfile(profile, user) {
   return function thunk(dispatch) {
-    return axios.get(`/api/profile/${user.id}`)
+    return axios.post(`/api/users/${user.id}`, profile)
       .then(res => res.data)
       .then(user => {
+        console.log('user', user)
         dispatch(setProfile(user));
       })
   }
