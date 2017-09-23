@@ -1,50 +1,54 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, CreateProfile} from './components'
-import {me, fetchCities} from './store'
+import { Main, Login, UserHome, CreateProfile, Buddies } from './components'
+import { me, fetchCities } from './store'
 
 /**
  * COMPONENT
  */
-class Routes extends Component {
-  componentDidMount () {
+export class Routes extends Component {
+  componentDidMount() {
     this.props.loadInitialData()
   }
 
-  render () {
-    const {isLoggedIn, hasProfile} = this.props
+  render() {
+    const { isLoggedIn, hasProfile } = this.props
+    console.log('isloggedin', isLoggedIn && hasProfile)
 
     return (
       <Router history={history}>
-        <Main>
+        <div className="container-fluid">
+          <Main />
           <Switch>
-            {/* Routes placed here are available to all visitors */}
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
             {
               isLoggedIn && hasProfile &&
                 <Switch>
                   {/* Routes placed here are only available after logging in and creating profile */}
                   <Route path='/home' component={UserHome} />
+                  <Route path='/buddies' component={Buddies} />
+                  <Route path='/' component={UserHome} />
                 </Switch>
-            }
+              }
             {
               isLoggedIn && !hasProfile &&
                 <Switch>
                   {/* Routes placed here are only available after logging in, before creating profile */}
                   <Route path='/home' component={CreateProfile} />
+                  <Route path='/' component={CreateProfile} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
           </Switch>
-        </Main>
-      </Router>
+
+          </div>
+        </Router>
     )
+
   }
 }
 
@@ -56,13 +60,13 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    hasProfile: !!state.user.userProfile
+    hasProfile: !!state.user.profile
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData() {
       dispatch(me())
       dispatch(fetchCities())
     }

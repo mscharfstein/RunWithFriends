@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form, Dropdown, Input, TextArea } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Dropdown, Input, TextArea, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { updateProfile } from '../store'
 
@@ -19,17 +19,21 @@ export class CreateProfileForm extends Component {
       prefWeekdayTime: [],
       prefWeekendTime: []
     }
-    this.handleChangeCity = this.handleChangeCity.bind(this);
     this.getCityDropdown = this.getCityDropdown.bind(this);
     this.getMilesDropdown = this.getMilesDropdown.bind(this);
     this.getSpeedDropdown = this.getSpeedDropdown.bind(this);
     this.getNeighborhoodDropdown = this.getNeighborhoodDropdown.bind(this);
     this.getTimeDropdown = this.getTimeDropdown.bind(this);
+
     this.handleChangeAge = this.handleChangeAge.bind(this);
     this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
     this.handleChangeLastName = this.handleChangeLastName.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeNeigh = this.handleChangeNeigh.bind(this);
+    this.handleChangeMiles = this.handleChangeMiles.bind(this);
+    this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
+    this.handleChangeWeekdayTimes = this.handleChangeWeekdayTimes.bind(this);
+    this.handleChangeWeekendTimes = this.handleChangeWeekendTimes.bind(this);
   }
 
   render() {
@@ -40,7 +44,7 @@ export class CreateProfileForm extends Component {
     const time_dropdown = this.getTimeDropdown()
 
     return (
-      <Form onSubmit={(evt) => this.props.handleSubmit(evt, this.state)}>
+      <Form onSubmit={(evt) => this.props.handleSubmit(evt, this.state, this.props.user)}>
 
         <h4>Profile Information</h4>
         <Form.Field required control={Input} label='First Name' placeholder='First Name' onChange={this.handleChangeFirstName}/>
@@ -65,7 +69,12 @@ export class CreateProfileForm extends Component {
         <br>
         </br>
 
-        <Form.Field control={Button}>Submit</Form.Field>
+        <Form.Field>
+        <Button primary type="submit">
+        Submit<Icon name='right chevron' />
+
+        </Button>
+        </Form.Field>
       </Form>
     )
   }
@@ -135,11 +144,19 @@ export class CreateProfileForm extends Component {
     const city = this.props.cities.filter(city => {
       return city.name === data.value
     })
-    this.setState({ city: evt.target.value, neighborhoods: city[0].neighborhoods })
+    this.setState({ city: data.value, neighborhoods: city[0].neighborhoods })
   }
 
   handleChangeNeigh(evt, data) {
     this.setState({ prefNeighborhoods: data.value })
+  }
+
+  handleChangeMiles(evt, data) {
+    this.setState({ prefDist: data.value })
+  }
+
+  handleChangeSpeed(evt, data) {
+    this.setState({ prefSpeed: data.value })
   }
 
   handleChangeWeekdayTimes(evt, data) {
@@ -154,15 +171,16 @@ export class CreateProfileForm extends Component {
 
 const mapState = (state) => {
   return {
-    cities: state.cities
+    cities: state.cities,
+    user: state.user
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, state) {
-      // pass in only what needed
-      dispatch(updateProfile(state))
+    handleSubmit(evt, data, user) {
+      console.log('data',data)
+      dispatch(updateProfile(data, user))
     }
   }
 }

@@ -7,6 +7,7 @@ const City = require('./city')
 // associations
 // profile
 User.belongsTo(Profile)
+//Profile.belongsTo(User)
 
 // runs
 User.belongsToMany(User,{as: 'partner', through: Run})

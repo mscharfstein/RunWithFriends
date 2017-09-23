@@ -30,10 +30,12 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
+  console.log('req.user after logging out', req.user)
   res.redirect('/')
 })
 
 router.get('/me', (req, res) => {
+  console.log('req.user', req.user)
   res.json(req.user)
 })
 
