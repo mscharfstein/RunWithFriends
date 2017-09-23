@@ -3,6 +3,7 @@ const Run = require('./run')
 const Profile = require('./profile')
 const Neighborhood = require('./neighborhood')
 const City = require('./city')
+const RequestedRun = require('./requestedRun')
 
 // associations
 // profile
@@ -10,7 +11,8 @@ User.belongsTo(Profile)
 //Profile.belongsTo(User)
 
 // runs
-User.belongsToMany(User,{as: 'partner', through: Run})
+Profile.belongsToMany(Profile,{as: 'partner', through: Run})
+RequestedRun.belongsTo(Profile)
 
 // cities
 City.belongsToMany(Neighborhood, {through: 'city_neighborhoods'})
@@ -26,5 +28,6 @@ module.exports = {
   Profile,
   Run,
   City,
-  Neighborhood
+  Neighborhood,
+  RequestedRun
 }

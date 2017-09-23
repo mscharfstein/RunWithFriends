@@ -35,14 +35,5 @@ function mapStatetoProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadRuns() {
-      dispatch(fetchRuns())
-    }
-  }
-}
-
-
 //wires up fetchNurses to be a prop as action creator for component
-export default connect(mapStatetoProps, mapDispatchToProps)(Buddies);
+export default connect(mapStatetoProps)(Buddies);

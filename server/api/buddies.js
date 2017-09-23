@@ -5,11 +5,14 @@ module.exports = router
 // need a lot more logic here - do this tonight
 router.put('/find', (req, res, next) => {
 
+  console.log('in find buddies route')
   let typeOfDay = 'prefWeekdayTime';
   if (req.body.day === 0 || req.body.day === 6) typeOfDay = 'prefWeekendTime';
 
   const time = findTime(req.body.time, req.body.AMPM)
   const speedInt = findSpeedInterval(req.body.prefSpeed)
+  // console.log('time', time, 'speedInt', speedInt, 'city', req.body.city, 'dist', req.body.prefDist, 'profileid', req.body.profileId)
+  console.log('req.body', req.body, time, speedInt)
   Profile.findAll({
     where: {
       city: req.body.city,

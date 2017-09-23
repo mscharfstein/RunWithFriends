@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, Dropdown, Grid, Icon, Image, Label, List, Statistic} from 'semantic-ui-react'
 import _ from 'lodash';
+import history from '../history'
+import {addBuddyToRunRequest} from '../store'
 
 class User extends Component {
   constructor(props) {
@@ -9,23 +11,29 @@ class User extends Component {
   }
 
   render() {
-    console.log('im rendering')
+    console.log('props', this.props)
     const colors = ['red', 'blue']
     return (
         <Card fluid className='patient-card'>
           <Card.Content>
             <Card.Header>
-              <Icon name='hotel' /> Yo
+              <Icon name='address card' /> {this.props.buddy.firstName + ' ' + this.props.buddy.lastName}
               <div className='right floated acuity-rating'>
-                Hi
+                #
               </div>
             </Card.Header>
             <Card.Description>
               <List size='tiny'>
-                Hello
+                Phone Number:
               </List>
               <div className='text right'>
-                Hey there
+                Speed: {this.props.buddy.prefSpeed}
+              </div>
+              <div className='text right'>
+                Distance: {this.props.buddy.prefDist}
+              </div>
+             <div className='request-run-button'>
+                <Button size='mini' color='green' onClick={(evt) => this.props.chooseBuddy(evt, this.props.requester.profileId, this.props.buddy.id)}>Join Me?</Button>
               </div>
             </Card.Description>
           </Card.Content>
@@ -34,5 +42,24 @@ class User extends Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    buddies: state.buddies,
+    requestedRun: state.requestedRun,
+    requester: state.user
+  }
+}
 
-export default User;
+const mapDispatch = (dispatch) => {
+  return {
+    chooseBuddy(evt, profileId, partnerId) {
+      // pass in only what needed
+      console.log('handle submit', profileId, partnerId)
+      dispatch(addBuddyToRunRequest(profileId, partnerId))
+      history.push('/home')
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(User)
+

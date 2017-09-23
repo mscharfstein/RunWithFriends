@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Checkbox, Form, Dropdown, Input, TextArea } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { findBuddies } from '../store'
+import { findBuddies, addRequestedRun } from '../store'
+import history from '../history'
 import {NavLink} from 'react-router-dom'
 //import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -11,13 +12,13 @@ export class RequestBuddyForm extends Component {
     super(props)
     // maintain local state for input while writing
     this.state = {
-      city: '',
+      city: 'New York City',
       neighborhoods: [],
-      prefNeighborhood: '',
+      prefNeighborhood: 'East Village',
       prefDist: this.props.profile.prefDist,
-      prefSpeed: '',
+      prefSpeed: '7:30',
       day: new Date().getDay(),
-      time: '',
+      time: '6:45',
       AMPM: 'AM'
     }
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -41,14 +42,14 @@ export class RequestBuddyForm extends Component {
       <Form label="Going on a run? Find a buddy!" onSubmit={(evt) => this.props.handleSubmit(evt, this.state, this.props.user)}>
         <h2> Going on a run? Find a buddy! </h2>
         <h4>Where are you running?</h4>
-        <Form.Field required control={Dropdown} label="City" placeholder="Choose City" selectOnBlur={false} options={city_dropdown} onChange={this.handleChangeCity} />
-        <Form.Field required control={Dropdown} label="Neighborhood" placeholder="Choose Neighborhood" selectOnBlur={false} options={neighborhood_dropdown} onChange={this.handleChangeNeigh} />
+        <Form.Field control={Dropdown} label="City" placeholder="Choose City" selectOnBlur={false} options={city_dropdown} onChange={this.handleChangeCity} />
+        <Form.Field control={Dropdown} label="Neighborhood" placeholder="Choose Neighborhood" selectOnBlur={false} options={neighborhood_dropdown} onChange={this.handleChangeNeigh} />
         <br>
         </br>
 
         <h4>How far and how fast?</h4>
-        <Form.Field control={Input} required label="Distance (in miles)" defaultValue={+this.props.profile.prefDist} onChange={this.handleChangeMiles} />
-        <Form.Field control={Input} required label="Speed (min per mile)" placeholder="9:30" onChange={this.handleChangeSpeed} />
+        <Form.Field control={Input} label="Distance (in miles)" defaultValue={+this.props.profile.prefDist} onChange={this.handleChangeMiles} />
+        <Form.Field control={Input} label="Speed (min per mile)" placeholder="9:30" onChange={this.handleChangeSpeed} />
         <br>
         </br>
 
@@ -57,13 +58,11 @@ export class RequestBuddyForm extends Component {
         <Form.Field>
 
         </Form.Field>
-        <Form.Field control={Input} required label="Time" placeholder="7:45" onChange={this.handleChangeTime} />
-        <Form.Field control={Dropdown} required value="AM" selectOnBlur={false} options={[{key: "AM", value: "AM", text: "AM"},{key: "PM", value: "PM", text: "PM"}]} onChange={this.handleChangeAMPM} />
+        <Form.Field control={Input} label="Time" placeholder="7:45" onChange={this.handleChangeTime} />
+        <Form.Field control={Dropdown} value="AM" selectOnBlur={false} options={[{key: "AM", value: "AM", text: "AM"},{key: "PM", value: "PM", text: "PM"}]} onChange={this.handleChangeAMPM} />
         <br>
         </br>
-        <NavLink to='/buddies'>
         <Form.Field control={Button}>Submit</Form.Field>
-        </NavLink>
       </Form>
     )
   }
@@ -122,7 +121,8 @@ const mapState = (state) => {
     cities: state.cities,
     user: state.user,
     profile: state.user.profile,
-    buddies: state.buddies
+    buddies: state.buddies,
+    requestedRun: state.requestedRun
   }
 }
 
@@ -130,8 +130,11 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt, state, user) {
       // pass in only what needed
+      console.log('handle submit')
       state.profileId = user.profileId
       dispatch(findBuddies(state))
+      dispatch(addRequestedRun(state))
+      history.push('/buddies')
     }
   }
 }
