@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import { connect } from 'react-redux'
+import { withRouter, Link, NavLink } from 'react-router-dom'
+import { logout } from '../store'
+import { Container, Menu, Grid } from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -10,50 +11,50 @@ import {logout} from '../store'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
-const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+class Main extends Component {
 
-  return (
-    <div>
-      <h1>Run With Friends!</h1>
-      <nav>
-        {
-          isLoggedIn
-            ? <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to='/home'>Home</Link>
-              <a href='#' onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to='/login'>Login</Link>
-              <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="false"></div>
-              <Link to='/signup'>Sign Up</Link>
-            </div>
-        }
-      </nav>
-      <hr />
-      {children}
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <Menu color='blue' size='large' inverted secondary className='nav-bar'>
+          <Menu.Item>
+            <img src='' />
+            <NavLink to='/home'>Run With Friends</NavLink>
+          </Menu.Item>
+          { this.props.isLoggedIn &&
+          <Menu.Item>
+            <a href='/profile'>Your Profile</a>
+          </Menu.Item>
+          }
+          { this.props.isLoggedIn &&
+          <Menu.Item>
+            <a href='/' onClick={this.props.handleClick}>Logout<small>{this.props.user}</small></a>
+          </Menu.Item>
+          }
+        </Menu>
+      </div>
+
+    )
+  }
 }
 
-/**
- * CONTAINER
- */
+
+/* -----------------    CONTAINER     ------------------ */
+
 const mapState = (state) => {
   return {
+    currentUser: state.user,
     isLoggedIn: !!state.user.id
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick () {
-      dispatch(logout())
-    }
+const mapDispatch = (dispatch, ownProps) => ({
+  handleClick: () => {
+    dispatch(logout());
+    ownProps.history.push('/')
   }
-}
+});
+
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
@@ -65,5 +66,4 @@ export default withRouter(connect(mapState, mapDispatch)(Main))
 Main.propTypes = {
   children: PropTypes.object,
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
 }
