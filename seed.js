@@ -10,12 +10,18 @@ const Profile = db.models.profile
 
 const profiles = [
   {firstName: 'Michelle', lastName: 'Scharfstein', age: 25, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']},
-	{firstName: 'Julia', lastName: 'Scharfstein', age: 21, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']}
+	{firstName: 'Julia', lastName: 'Scharfstein', age: 21, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg','East Village'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']},
+	{firstName: 'Allison', lastName: 'Scharfstein', age: 27, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg','Upper East Side'], prefDist: 3, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning','Morning'], prefWeekendTime: ['Early Morning','Mid-day']},
+	{firstName: 'Jonathan', lastName: 'Scharfstein', age: 50, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['East Village','Upper East Side'], prefDist: 2.5, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning','Morning'], prefWeekendTime: ['Early Morning','Mid-day']},
+	{firstName: 'Suzanne', lastName: 'Scharfstein', age: 50, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['East Village','Upper East Side'], prefDist: 3.5, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning','Morning'], prefWeekendTime: ['Early Morning','Morning']}
 ]
 
 const users = [
   {email: 'michelle@gmail.com', password: 'michelle', profileId: 1},
-	{email: 'julia@gmail.com', password: 'julia', profileId: 2}
+	{email: 'julia@gmail.com', password: 'julia', profileId: 2},
+	{email: 'allison@gmail.com', password: 'allison', profileId: 3},
+	{email: 'jonathan@gmail.com', password: 'jonathan', profileId: 4},
+	{email: 'suzanne@gmail.com', password: 'suzanne', profileId: 5}
 ]
 
 const cities = [
@@ -34,8 +40,14 @@ const newYorkNeighborhoods = [
 ]
 
 const runs = [
-  {dist: 4, speed: '7:30', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 1, partnerId: 2, neighborhood: 'East Village'},
-	{dist: 5, speed: '7:45', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 2, partnerId: 1, neighborhood: 'Williamsburg'}
+	{dist: 4, speed: '8:30', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 1, partnerId: 2, neighborhood: 'East Village'},
+	{dist: 4, speed: '8:30', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 2, partnerId: 1, neighborhood: 'East Village'},
+
+	{dist: 5, speed: '8:45', date: new Date(Date.now()), status: "Completed", rating: 3, profileId: 3, partnerId: 4, neighborhood: 'Williamsburg'},
+	{dist: 5, speed: '8:45', date: new Date(Date.now()), status: "Completed", rating: 5, profileId: 4, partnerId: 3, neighborhood: 'Williamsburg'},
+
+	{dist: 3, speed: '9:45', date: new Date(Date.now()), status: "Completed", rating: 5, profileId: 5, partnerId: 3, neighborhood: 'Williamsburg'},
+	{dist: 3, speed: '9:45', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 3, partnerId: 5, neighborhood: 'Williamsburg'}
 ]
 
 const seed = () => {

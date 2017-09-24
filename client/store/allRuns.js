@@ -16,7 +16,7 @@ const setAllRuns = runs => ({type: SET_ALL_RUNS, runs})
  */
 export function fetchAllRuns(profileId) {
 return function thunk(dispatch) {
-  return axios.get(`/api/runs/${profileId}`)
+  return axios.get(`/api/runs/all/${profileId}`)
     .then(res => res.data)
     .then(runs => {
       dispatch(setAllRuns(runs));

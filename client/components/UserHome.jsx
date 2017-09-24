@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Grid, Container, Menu} from 'semantic-ui-react'
 import {withRouter, Link, NavLink} from 'react-router-dom'
 import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun} from './index'
-import {fetchRequests, fetchPastRuns, fetchUpcomingRuns} from '../store'
+import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
 /**
  * COMPONENT
  */
@@ -26,7 +26,7 @@ export class UserHome extends Component {
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>
-          <PastRuns />
+          <BrowseRuns />
         </Grid.Column>
         <Grid.Column width={6} className='nurse-column'>
           <RequestBuddyForm />
@@ -46,7 +46,8 @@ const mapState = (state) => {
     user: state.user,
     incomingRequests: state.incomingRequests,
     upcomingRun: state.upcomingRun,
-    pastRuns: state.pastRuns
+    pastRuns: state.pastRuns,
+    allRuns: state.allRuns
   }
 }
 
@@ -56,6 +57,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchRequests(profileId))
       dispatch(fetchPastRuns(profileId))
       dispatch(fetchUpcomingRuns(profileId))
+      dispatch(fetchAllRuns(profileId))
     }
   }
 }

@@ -30,7 +30,7 @@ class IncomingRuns extends Component {
         <div>
         Desired Time: {new Date(this.props.run.date).toDateString()}, {this.props.run.time}
         </div>
-        <Button onClick={(evt)=>this.props.handleAccept(evt, this.props.run)}>Accept!</Button>
+        <Button onClick={(evt)=>this.props.handleAccept(evt, this.props.run, this.props.user.profileId)}>Accept!</Button>
         <Button onClick={(evt)=>this.props.handleDecline(evt, this.props.run)}>Sorry, can't make it</Button>
       </div>
     );
@@ -40,16 +40,17 @@ class IncomingRuns extends Component {
 const mapState = (state) => {
   return {
     buddies: state.buddies,
-    requester: state.user
+    user: state.user
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    handleAccept(evt, run) {
-      console.log('run.profile.phone', run.profile, run.profile.phone)
+    handleAccept(evt, run, profileId) {
       dispatch(deleteRequest(run.id))
       dispatch(setIncomingReq([]))
+
+      run.currentUserId = profileId
       dispatch(createRun(run))
       dispatch(text(run.profile.phone, "Let's get running, see you soon!"))
       history.push('/home')

@@ -4,7 +4,7 @@ const Profile = require('./profile')
 const Neighborhood = require('./neighborhood')
 const City = require('./city')
 const RequestedRun = require('./requestedRun')
-
+const RunUserDetails = require('./runUserDetails')
 // associations
 // profile
 User.belongsTo(Profile)
@@ -16,6 +16,9 @@ User.belongsTo(Profile)
 //   unique: false
 // }})
 RequestedRun.belongsTo(Profile)
+// Run.belongsToMany(Profile, {as: 'runner', through: {
+//   model: RunUserDetails
+// }})
 Run.belongsTo(Profile)
 Run.belongsTo(Profile, {as: 'partner'})
 

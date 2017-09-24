@@ -9,7 +9,7 @@ import {fetchAllRuns} from '../store'
 class BrowseRuns extends Component {
 
   componentDidMount() {
-    this.props.loadAllRuns(this.props.user.profileId)
+    //this.props.loadAllRuns(this.props.user.profileId)
   }
 
   render() {
@@ -25,7 +25,7 @@ class BrowseRuns extends Component {
         </Card.Group>
         }
         {
-          !this.props.pastRuns.length && "There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends!"
+          !this.props.allRuns.length && "There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends!"
         }
       </div>
     );
@@ -34,7 +34,8 @@ class BrowseRuns extends Component {
 
 function mapStatetoProps(state){
   return {
-    allRuns: state.allRuns
+    allRuns: state.allRuns,
+    user: state.user
   }
 }
 

@@ -26,7 +26,7 @@ return function thunk(dispatch) {
 
 export function fetchUpcomingRuns(profileId) {
   return function thunk(dispatch) {
-    return axios.get(`/api/runs/${profileId}`)
+    return axios.get(`/api/runs/upcoming/${profileId}`)
       .then(res => res.data)
       .then(run => {
         if (!run.length) run = [{}]

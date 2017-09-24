@@ -9,20 +9,35 @@ class Run extends Component {
   }
 
   render() {
-    console.log('props', this.props)
+    let yourRun = true
+    let header = ''
+    let runParticipants = ''
     let partner = {}
-    if (this.props.profileId === this.props.run.profileId) partner = this.props.run.partner
-    else partner = this.props.run.profile
+
+    if (this.props.profileId === this.props.run.profileId) {
+      partner = this.props.run.partner
+      runParticipants = `Partner: ${partner.firstName} ${partner.lastName}`
+      header = `Run with ${partner.firstName} on ${new Date(this.props.run.date).toDateString()}`
+    }
+
+    else {
+      yourRun = false
+      const person1 = this.props.run.profile
+      const person2 = this.props.run.partner
+
+      runParticipants = `Participants: ${person1.firstName} ${person1.lastName} and ${person2.firstName} ${person2.lastName}`
+      header = `Upcoming Run in ${this.props.run.neighborhood} on ${new Date(this.props.run.date).toDateString()}`
+    }
 
     return (
         <Card fluid className='patient-card'>
           <Card.Content>
             <Card.Header>
-              <Icon> <img src='/favicon.ico' width="25px"/> </Icon> Run with {partner.firstName} on {new Date(this.props.run.date).toDateString()}
+              <Icon> <img src='/favicon.ico' width="25px"/> </Icon> {header}
             </Card.Header>
             <Card.Description>
               <div className='text right'>
-                Partner: {`${partner.firstName} ${partner.lastName}`}
+                {runParticipants}
               </div>
               <div className='text right'>
                 Neighborhood: {this.props.run.neighborhood}
@@ -34,9 +49,15 @@ class Run extends Component {
                 Speed: {this.props.run.speed} minutes per mile
               </div>
               {
-                this.props.run.rating &&
+                this.props.run.rating && yourRun &&
                 <div className='text right'>
                   Your Rating: {this.props.run.rating} stars
+                </div>
+              }
+              {
+                !yourRun &&
+                <div className='join-run'>
+                  <Button color="green">+</Button>
                 </div>
               }
             </Card.Description>
