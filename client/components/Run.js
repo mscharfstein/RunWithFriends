@@ -9,23 +9,36 @@ class Run extends Component {
   }
 
   render() {
-    const colors = ['red', 'blue']
+    console.log('props', this.props)
+    let partner = {}
+    if (this.props.profileId === this.props.run.profileId) partner = this.props.run.partner
+    else partner = this.props.run.profile
+
     return (
         <Card fluid className='patient-card'>
           <Card.Content>
             <Card.Header>
-              <Icon name='hotel' /> Yo
-              <div className='right floated acuity-rating'>
-                Hi
-              </div>
+              <Icon> <img src='/favicon.ico' width="25px"/> </Icon> Run with {partner.firstName} on {new Date(this.props.run.date).toDateString()}
             </Card.Header>
             <Card.Description>
-              <List size='tiny'>
-                Hello
-              </List>
               <div className='text right'>
-                Hey there
+                Partner: {`${partner.firstName} ${partner.lastName}`}
               </div>
+              <div className='text right'>
+                Neighborhood: {this.props.run.neighborhood}
+              </div>
+              <div className='text right'>
+                Distance: {this.props.run.dist} miles
+              </div>
+              <div className='text right'>
+                Speed: {this.props.run.speed} minutes per mile
+              </div>
+              {
+                this.props.run.rating &&
+                <div className='text right'>
+                  Your Rating: {this.props.run.rating} stars
+                </div>
+              }
             </Card.Description>
           </Card.Content>
         </Card>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Grid, Container, Menu} from 'semantic-ui-react'
 import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns} from './index'
-import {fetchRequests, fetchPastRuns} from '../store'
+import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun} from './index'
+import {fetchRequests, fetchPastRuns, fetchUpcomingRuns} from '../store'
 /**
  * COMPONENT
  */
@@ -16,11 +16,13 @@ export class UserHome extends Component {
   }
 
   render() {
-    console.log('incomingreq', this.props.incomingRequests, this.props.incomingRequests.length)
     return (
       <Container fluid>
       {this.props.incomingRequests.length &&
           <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
+      }
+      {this.props.upcomingRun.length && new Date(this.props.upcomingRun.date) < Date.now() &&
+        <ScrollingModal header={'How was your run?'} content={<RateRun run={this.props.upcomingRun}/>} />
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>
@@ -53,6 +55,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData(profileId) {
       dispatch(fetchRequests(profileId))
       dispatch(fetchPastRuns(profileId))
+      dispatch(fetchUpcomingRuns(profileId))
     }
   }
 }

@@ -6,10 +6,16 @@ const Run = db.models.run;
 const DatePref = db.models.datePref;
 const City = db.models.city;
 const Neighborhood = db.models.neighborhood
+const Profile = db.models.profile
+
+const profiles = [
+  {firstName: 'Michelle', lastName: 'Scharfstein', age: 25, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']},
+	{firstName: 'Julia', lastName: 'Scharfstein', age: 21, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']}
+]
 
 const users = [
-  {name: 'Michelle Scharfstein', age: 25, email: 'gracehopper@gmail.com', password: 'gracehopper', phone: '2168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: 9, prefAge: 25, prefGender: 'either'},
-  {name: 'Julia Scharfstein', age: 21, email: 'jscharf614@gmail.com', password: 'password', phone: '2168709580', city: 'New York City', prefNeighborhoods: ['Lower East Side', 'Williamsburg'], prefDist: 3.5, prefSpeed: 10, prefGender: 'either'},
+  {email: 'michelle@gmail.com', password: 'michelle', profileId: 1},
+	{email: 'julia@gmail.com', password: 'julia', profileId: 2}
 ]
 
 const cities = [
@@ -27,12 +33,19 @@ const newYorkNeighborhoods = [
 	{name: 'West Side Highway'}
 ]
 
+const runs = [
+  {dist: 4, speed: '7:30', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 1, partnerId: 2, neighborhood: 'East Village'},
+	{dist: 5, speed: '7:45', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 2, partnerId: 1, neighborhood: 'Williamsburg'}
+]
+
 const seed = () => {
+	var allProfiles = profiles.map(profile => {Profile.create(profile)})
 	var allUsers = users.map(user => { User.create(user) });
-	console.log('allUsers', allUsers)
 	var allCities = cities.map(city => { City.create(city)})
 	var allNewYorkNeigh = newYorkNeighborhoods.map(neighborhood => {Neighborhood.create(neighborhood)})
-	 	return Promise.all(allUsers.concat(allCities).concat(allNewYorkNeigh))
+	var allRuns = runs.map(run => {Run.create(run)})
+
+	 	return Promise.all(allUsers.concat(allCities).concat(allNewYorkNeigh).concat(allRuns).concat(allProfiles))
 					.then((promises) => {
 						console.log('promises', promises)
 

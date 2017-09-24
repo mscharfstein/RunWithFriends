@@ -26,3 +26,14 @@ router.get('/history/:profileId', (req, res, next) => {
     .then(runs => res.json(runs))
     .catch(next)
 })
+
+router.get('/:profileId', (req, res, next) => {
+  Run.findAll({
+    where: {
+      profileId: req.params.profileId,
+      status: "Upcoming"
+    }
+  })
+    .then(runs => res.json(runs))
+    .catch(next)
+})

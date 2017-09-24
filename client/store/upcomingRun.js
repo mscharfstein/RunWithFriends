@@ -24,6 +24,17 @@ return function thunk(dispatch) {
   }
 }
 
+export function fetchUpcomingRuns(profileId) {
+  return function thunk(dispatch) {
+    return axios.get(`/api/runs/${profileId}`)
+      .then(res => res.data)
+      .then(run => {
+        if (!run.length) run = [{}]
+        dispatch(setRun(run[0]));
+      })
+    }
+  }
+
 
 /**
  * REDUCER

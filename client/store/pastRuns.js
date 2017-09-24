@@ -9,7 +9,7 @@ const SET_PAST_RUNS = 'SET_PAST_RUNS'
 /**
  * ACTION CREATORS
  */
-const setPastRuns = run => ({type: SET_PAST_RUNS, runs})
+const setPastRuns = runs => ({type: SET_PAST_RUNS, runs})
 
 /**
  * THUNK CREATORS

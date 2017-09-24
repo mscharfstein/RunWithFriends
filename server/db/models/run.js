@@ -1,12 +1,13 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Profile = require('./Profile')
 
 const Run = db.define('run', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
+  // id: {
+  //   type: Sequelize.INTEGER,
+  //   primaryKey: true,
+  //   autoIncrement: true
+  // },
   dist: {
     type: Sequelize.FLOAT
   },
@@ -16,6 +17,9 @@ const Run = db.define('run', {
   date: {
     type: Sequelize.DATE
   },
+  status: {
+    type: Sequelize.STRING
+  },
   rating: {
     type: Sequelize.INTEGER,
     validate: {
@@ -23,8 +27,15 @@ const Run = db.define('run', {
       max: 5
     }
   },
+  neighborhood: {
+    type: Sequelize.STRING
+  },
   comments: {
     type: Sequelize.TEXT
+  }
+}, {
+  defaultScope: {
+    include: [{model: Profile}, {model: Profile, as: 'partner'}]
   }
 })
 

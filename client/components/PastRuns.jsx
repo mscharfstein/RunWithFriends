@@ -12,15 +12,15 @@ class PastRuns extends Component {
     return (
       <div>
         <Header as='h3' textAlign='center'>Your Past Runs</Header>
-        {this.props.pastRuns.length &&
+        {!!this.props.pastRuns.length &&
         <Card.Group itemsPerRow='2'>
           {_.map(this.props.pastRuns, run => {
-            return <Run key={run.id} run={run}/>
+            return <Run key={run.id} run={run} profileId={this.props.user.profileId}/>
           })}
         </Card.Group>
         }
         {
-          this.props.pastRuns.length === 0 ? "You haven't gone on any runs yet. Request a running buddy to experience Run With Friends for the first time!" : ''
+          !this.props.pastRuns.length && "You haven't gone on any runs yet. Request a running buddy to experience the joy of running with friends!"
         }
       </div>
     );
@@ -29,18 +29,10 @@ class PastRuns extends Component {
 
 function mapStatetoProps(state){
   return {
-    pastRuns: state.pastRuns
+    pastRuns: state.pastRuns,
+    user: state.user
   }
 }
-
-function mapDispatchToProps(dispatch) {
-  return {
-    loadRuns() {
-      dispatch(fetchRuns())
-    }
-  }
-}
-
 
 //wires up fetchNurses to be a prop as action creator for component
-export default connect(mapStatetoProps, mapDispatchToProps)(PastRuns);
+export default connect(mapStatetoProps)(PastRuns);

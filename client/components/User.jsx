@@ -16,10 +16,7 @@ class User extends Component {
         <Card fluid className='patient-card'>
           <Card.Content>
             <Card.Header>
-              <Icon name='address card' /> {this.props.buddy.firstName + ' ' + this.props.buddy.lastName}
-              <div className='right floated acuity-rating'>
-                #
-              </div>
+              <Icon name='user' /> {this.props.buddy.firstName + ' ' + this.props.buddy.lastName}
             </Card.Header>
             <Card.Description>
               <List size='tiny'>

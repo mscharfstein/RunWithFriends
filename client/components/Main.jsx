@@ -16,9 +16,9 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Menu color='blue' size='large' inverted secondary className='nav-bar'>
+        <Menu color='grey' size='large' inverted secondary className='nav-bar'>
           <Menu.Item>
-            <img src='' />
+            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Olympic_pictogram_Athletics_-_colored.svg/1024px-Olympic_pictogram_Athletics_-_colored.svg.png' />
             <NavLink to='/home'>Run With Friends</NavLink>
           </Menu.Item>
           { this.props.isLoggedIn &&

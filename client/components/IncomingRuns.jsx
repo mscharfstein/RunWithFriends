@@ -17,11 +17,7 @@ class IncomingRuns extends Component {
         {this.props.run.profile.firstName + ' ' + this.props.run.profile.lastName} wants to run with you!
         <br>
         </br>
-        <div>
-        Run details:
-        </div>
-        <br>
-        </br>
+        <h4>Run details:</h4>
         <div>
         Neighborhood: {this.props.run.neighborhood}
         </div>
