@@ -7,6 +7,7 @@ const DatePref = db.models.datePref;
 const City = db.models.city;
 const Neighborhood = db.models.neighborhood
 const Profile = db.models.profile
+const RunUserDetails = db.models.runUserDetails
 
 const profiles = [
   {firstName: 'Michelle', lastName: 'Scharfstein', age: 25, phone: '+12168700516', city: 'New York City', prefNeighborhoods: ['Williamsburg'], prefDist: 4, prefSpeed: '8-9', prefWeekdayTime: ['Early Morning'], prefWeekendTime: ['Early Morning']},
@@ -50,14 +51,26 @@ const runs = [
 	{dist: 3, speed: '9:45', date: new Date(Date.now()), status: "Completed", rating: 4, profileId: 3, partnerId: 5, neighborhood: 'Williamsburg'}
 ]
 
+const rundetails = [
+	{rating: 4, runId: 1, profileId: 1},
+	{rating: 2, runId: 1, profileId: 2},
+
+	{rating: 4, runId: 2, profileId: 3},
+	{rating: 2, runId: 2, profileId: 4},
+
+	{rating: 4, runId: 3, profileId: 5},
+	{rating: 2, runId: 3, profileId: 1}
+]
+
 const seed = () => {
 	var allProfiles = profiles.map(profile => {Profile.create(profile)})
 	var allUsers = users.map(user => { User.create(user) });
 	var allCities = cities.map(city => { City.create(city)})
 	var allNewYorkNeigh = newYorkNeighborhoods.map(neighborhood => {Neighborhood.create(neighborhood)})
 	var allRuns = runs.map(run => {Run.create(run)})
+	var allRunDetails = rundetails.map(details => {RunUserDetails.create(details)})
 
-	 	return Promise.all(allUsers.concat(allCities).concat(allNewYorkNeigh).concat(allRuns).concat(allProfiles))
+	 	return Promise.all(allUsers.concat(allCities).concat(allNewYorkNeigh).concat(allRuns).concat(allProfiles).concat(allRunDetails))
 					.then((promises) => {
 						console.log('promises', promises)
 

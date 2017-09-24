@@ -35,7 +35,7 @@ const Run = db.define('run', {
   }
 }, {
   defaultScope: {
-    include: [{model: Profile}, {model: Profile, as: 'partner'}]
+    include: [{model: Profile}]
   }
 })
 

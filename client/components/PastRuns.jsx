@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import  Run from './Run';
 import { Button, Card, Header, Image, Grid } from 'semantic-ui-react';
-
+import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
 
 class PastRuns extends Component {
 
@@ -14,8 +14,8 @@ class PastRuns extends Component {
         <Header as='h3' textAlign='center'>Your Past Runs</Header>
         {!!this.props.pastRuns.length &&
         <Card.Group itemsPerRow='2'>
-          {_.map(this.props.pastRuns, run => {
-            return <Run key={run.id} run={run} profileId={this.props.user.profileId}/>
+          {this.props.pastRuns.map(run => {
+            return <Run key={run.id} run={run} profileId={this.props.user.profileId} yourRun={true}/>
           })}
         </Card.Group>
         }
@@ -35,4 +35,4 @@ function mapStatetoProps(state){
 }
 
 //wires up fetchNurses to be a prop as action creator for component
-export default connect(mapStatetoProps)(PastRuns);
+export default connect(mapStatetoProps)(PastRuns)

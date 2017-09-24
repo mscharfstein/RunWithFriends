@@ -4,7 +4,7 @@ import { fetchRuns } from '../store';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import  User from './User.jsx';
-import { Button, Card, Header, Image, Grid } from 'semantic-ui-react';
+import { Button, Card, Header, Image, Grid, Container } from 'semantic-ui-react';
 
 
 class Buddies extends Component {
@@ -19,12 +19,12 @@ class Buddies extends Component {
 
   render() {
     return (
-      <div>
-        <Header as='h3' textAlign='center'>Your Possible Running Buddies!</Header>
+      <Container fluid className='patient-column'>
+        <Header as='h3' textAlign='center'>Browse Possible Running Buddies:</Header>
         <Card.Group itemsPerRow='3'>
           {this.renderBuddies()}
         </Card.Group>
-      </div>
+      </Container>
     );
   }
 }

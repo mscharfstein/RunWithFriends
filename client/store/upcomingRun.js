@@ -29,12 +29,21 @@ export function fetchUpcomingRuns(profileId) {
     return axios.get(`/api/runs/upcoming/${profileId}`)
       .then(res => res.data)
       .then(run => {
-        if (!run.length) run = [{}]
-        dispatch(setRun(run[0]));
+        if (!run) run = {}
+        dispatch(setRun(run));
       })
     }
   }
 
+export function markAsComplete(runId) {
+  return function thunk(dispatch) {
+    return axios.put(`/api/runs/upcoming/${runId}`)
+      .then(res => res.data)
+      .then(run => {
+        dispatch(setRun({}))
+      })
+  }
+}
 
 /**
  * REDUCER

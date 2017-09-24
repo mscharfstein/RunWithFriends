@@ -9,23 +9,34 @@ class Run extends Component {
   }
 
   render() {
-    let yourRun = true
     let header = ''
     let runParticipants = ''
-    let partner = {}
-
-    if (this.props.profileId === this.props.run.profileId) {
-      partner = this.props.run.partner
-      runParticipants = `Partner: ${partner.firstName} ${partner.lastName}`
-      header = `Run with ${partner.firstName} on ${new Date(this.props.run.date).toDateString()}`
+    let yourRunDetails = {}
+    // change this to loop through the profiles in the run
+    if (this.props.yourRun) {
+      console.log(this.props.run)
+      const partners = this.props.run.profiles.map(profile => {
+        if (+profile.id !== +this.props.profileId)
+        return `${profile.firstName} ${profile.lastName}`
+        return ''
+      })
+      runParticipants = `Partner(s): ${partners.join("& ")}`
+      header = `Run with ${partners.join(" & ")} on ${new Date(this.props.run.date).toDateString()}`
+      const yourRunProfile = this.props.run.profiles.filter(profile => {
+        return +profile.id === +this.props.profileId
+      })
+      console.log('yourrunprofile', yourRunProfile)
+      yourRunDetails = yourRunProfile[0].runUserDetails
+      console.log('yourRunDetails', yourRunDetails)
     }
 
+    // change this to loop through the profiles on the run
     else {
-      yourRun = false
-      const person1 = this.props.run.profile
-      const person2 = this.props.run.partner
+      const participants = this.props.run.profiles.map(profile => {
+        return `${profile.firstName} ${profile.lastName}`
+      })
 
-      runParticipants = `Participants: ${person1.firstName} ${person1.lastName} and ${person2.firstName} ${person2.lastName}`
+      runParticipants = `Participants: ${participants.join("& ")}`
       header = `Upcoming Run in ${this.props.run.neighborhood} on ${new Date(this.props.run.date).toDateString()}`
     }
 
@@ -49,13 +60,14 @@ class Run extends Component {
                 Speed: {this.props.run.speed} minutes per mile
               </div>
               {
-                this.props.run.rating && yourRun &&
+                // this is definitely wrong!!!!
+                this.props.yourRun &&
                 <div className='text right'>
-                  Your Rating: {this.props.run.rating} stars
+                  Your Rating: {yourRunDetails.rating} stars
                 </div>
               }
               {
-                !yourRun &&
+                !this.props.yourRun &&
                 <div className='join-run'>
                   <Button color="green">+</Button>
                 </div>

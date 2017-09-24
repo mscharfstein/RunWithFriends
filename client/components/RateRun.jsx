@@ -14,7 +14,7 @@ class RateRun extends Component {
 
   render() {
     let partner = {}
-    if (this.props.requester.profileId === this.props.run.profileId) partner = this.props.run.partner
+    if (this.props.user.profileId === this.props.run.profileId) partner = this.props.run.partner
     else partner = this.props.run.profile
 
     return (
@@ -35,8 +35,7 @@ class RateRun extends Component {
 
 const mapState = (state) => {
   return {
-    buddies: state.buddies,
-    requester: state.user,
+    user: state.user,
     neighborhoods: state.neighborhoods
   }
 }

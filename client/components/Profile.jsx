@@ -11,6 +11,11 @@ import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../
 
 export class Profile extends Component {
 
+  componentDidMount() {
+    console.log('mounting', this.props.user.profileId)
+    this.props.loadInitialData(this.props.user.profileId)
+  }
+
   render() {
     return (
       <Container fluid>
@@ -43,6 +48,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    loadInitialData(profileId) {
+      console.log('fetcthing with profid', profileId)
+      dispatch(fetchPastRuns(profileId))
+    }
   }
 }
 

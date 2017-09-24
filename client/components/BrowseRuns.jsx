@@ -8,10 +8,6 @@ import {fetchAllRuns} from '../store'
 
 class BrowseRuns extends Component {
 
-  componentDidMount() {
-    //this.props.loadAllRuns(this.props.user.profileId)
-  }
-
   render() {
     return (
       <div>
@@ -19,8 +15,7 @@ class BrowseRuns extends Component {
         {!!this.props.allRuns.length &&
         <Card.Group itemsPerRow='2'>
           {_.map(this.props.allRuns, run => {
-            // change because currently run only shows name that is not you, in this case show both names
-            return <Run key={run.id} run={run}/>
+            return <Run key={run.id} run={run} yourRun={false}/>
           })}
         </Card.Group>
         }

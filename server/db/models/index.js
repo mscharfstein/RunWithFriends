@@ -8,19 +8,14 @@ const RunUserDetails = require('./runUserDetails')
 // associations
 // profile
 User.belongsTo(Profile)
-//Profile.belongsTo(User)
 
-// runs
-// Profile.belongsToMany(Profile,{as: 'partner', through: {
-//   model: Run,
-//   unique: false
-// }})
 RequestedRun.belongsTo(Profile)
-// Run.belongsToMany(Profile, {as: 'runner', through: {
-//   model: RunUserDetails
-// }})
-Run.belongsTo(Profile)
-Run.belongsTo(Profile, {as: 'partner'})
+Run.belongsToMany(Profile, {through: {
+  model: RunUserDetails
+}})
+Profile.belongsToMany(Run, {through: {model: RunUserDetails}})
+// Run.belongsTo(Profile)
+// Run.belongsTo(Profile, {as: 'partner'})
 
 // cities
 City.belongsToMany(Neighborhood, {through: 'city_neighborhoods'})
@@ -37,5 +32,6 @@ module.exports = {
   Run,
   City,
   Neighborhood,
-  RequestedRun
+  RequestedRun,
+  RunUserDetails
 }
