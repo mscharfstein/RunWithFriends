@@ -3,14 +3,15 @@ const { Profile, Run, RequestedRun } = require('../db/models')
 module.exports = router
 
 router.get('/:profileId', (req, res, next) => {
+  console.log('requestedPartnerId', req.params.profileId)
   RequestedRun.findAll({
     where: {
       requestedPartnerId: req.params.profileId
-    },
-    order: [
-      ['date', 'ASC']
-    ]
+    }
   })
-    .then(runs => res.json(runs))
+    .then(runs => {
+      console.log('runs', runs)
+      res.json(runs)
+    })
     .catch(next)
 })

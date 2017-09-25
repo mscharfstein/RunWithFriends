@@ -89,6 +89,7 @@ const mapDispatch = (dispatch) => {
       partners.map(partner => {
         dispatch(text(partner.phone, `${profile.firstName} ${profile.lastName} will join your run on ${new Date(run.date).toDateString()}!`))
       })
+
       history.push('/home')
     }
   }
