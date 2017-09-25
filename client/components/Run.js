@@ -70,8 +70,8 @@ class Run extends Component {
               }
               {
                 !this.props.yourRun &&
-                <div className='join-run'>
-                  <Button onClick={(evt, data)=> this.props.handleJoinRun(evt, data, partners, this.props.run, this.props.profile)} color="green">+</Button>
+                <div>
+                  <Button className='right-btn' size='mini' onClick={(evt, data)=> this.props.handleJoinRun(evt, data, partners, this.props.run, this.props.profile)} color="green">+</Button>
                 </div>
               }
             </Card.Description>

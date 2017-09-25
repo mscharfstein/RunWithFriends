@@ -55,12 +55,14 @@ export class RequestBuddyForm extends Component {
 
         <h4>When you are going?</h4>
         {/*add calendar api?*/}
-        <Form.Field control={Input} label="Date" placeholder="9/24/2018" onChange={this.handleChangeDate} />
+        <Form.Field inline control={Input} label="Date" placeholder={new Date(Date.now()).toDateString()} onChange={this.handleChangeDate} />
+        <Form.Group inline>
         <Form.Field control={Input} label="Time" placeholder="7:45" onChange={this.handleChangeTime} />
         <Form.Field control={Dropdown} value="AM" selectOnBlur={false} options={[{key: "AM", value: "AM", text: "AM"},{key: "PM", value: "PM", text: "PM"}]} onChange={this.handleChangeAMPM} />
+        </Form.Group>
         <br>
         </br>
-        <Form.Field control={Button}>Submit</Form.Field>
+        <Form.Field control={Button} color="green">Submit</Form.Field>
       </Form>
     )
   }

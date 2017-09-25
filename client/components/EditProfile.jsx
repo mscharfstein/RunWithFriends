@@ -50,7 +50,7 @@ export class CreateProfileForm extends Component {
     return (
 
       <Form onSubmit={(evt) => this.props.handleSubmit(evt, this.state, this.props.user)}>
-        <h3>Edit Your Profile:</h3>
+        <h2>Edit Your Profile:</h2>
         <h4>Profile Information</h4>
         <Form.Field required control={Input} label='First Name' value={this.state.firstName} onChange={this.handleChangeFirstName}/>
         <Form.Field required control={Input} label='Last Name' value={this.state.lastName} onChange={this.handleChangeLastName}/>
@@ -60,20 +60,29 @@ export class CreateProfileForm extends Component {
         </br>
 
         <h4>Running Preferences</h4>
+        <Form.Group>
         <Form.Field required control={Dropdown} label="City" value={this.state.city} selectOnBlur={false} options={city_dropdown} onChange={this.handleChangeCity} />
+        </Form.Group>
+
+        <Form.Group>
         <Form.Field control={Dropdown} label="Preferred Neighborhoods" value={this.state.prefNeighborhoods} fluid multiple selection placeholder="Choose Neighborhoods" selectOnBlur={false} options={neighborhood_dropdown} onChange={this.handleChangeNeigh} />
+        </Form.Group>
         <br>
         </br>
+        <Form.Group>
         <Form.Field required control={Dropdown} label="Preferred Distance (miles)"
         value={`${this.state.prefDist}`}
         selectOnBlur={false} options={miles_dropdown} onChange={this.handleChangeMiles} />
         <Form.Field required control={Dropdown} label="Preferred Speed (min per mile)" value={this.state.prefSpeed} selectOnBlur={false} options={speed_dropdown} onChange={this.handleChangeSpeed} />
+        </Form.Group>
         <br>
         </br>
 
         <h4>Time Preferences</h4>
+        <Form.Group>
         <Form.Field control={Dropdown} label="Weekday Times" value={this.state.prefWeekdayTime} selectOnBlur={false} fluid multiple selection options={time_dropdown} onChange={this.handleChangeWeekdayTimes} />
         <Form.Field control={Dropdown} label="Weekend Times" value={this.state.prefWeekendTime} fluid multiple selection placeholder="Choose Time of Day" selectOnBlur={false} options={time_dropdown} onChange={this.handleChangeWeekendTimes} />
+        </Form.Group>
         <br>
         </br>
 

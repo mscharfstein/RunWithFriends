@@ -23,13 +23,13 @@ class User extends Component {
                 Phone Number: {this.props.buddy.phone}
               </List>
               <div className='text right'>
-                Speed: {this.props.buddy.prefSpeed} minutes per mile
+                Preferred Speed: {this.props.buddy.prefSpeed} minutes per mile
               </div>
               <div className='text right'>
-                Distance: {this.props.buddy.prefDist} miles
+                Preferred Distance: {this.props.buddy.prefDist} miles
               </div>
-             <div className='request-run-button'>
-                <Button size='mini' color='green' onClick={(evt) => this.props.chooseBuddy(evt, this.props.requestedRun, this.props.buddy)}>Join Me?</Button>
+             <div>
+                <Button className='right-btn' size='mini' color='green' onClick={(evt) => this.props.chooseBuddy(evt, this.props.requestedRun, this.props.buddy)}>Join Me?</Button>
               </div>
             </Card.Description>
           </Card.Content>

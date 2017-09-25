@@ -23,7 +23,7 @@ class Main extends Component {
           </Menu.Item>
           { this.props.isLoggedIn &&
           <Menu.Item>
-            <a href='/profile'>Your Profile</a>
+            <a href='/profile'>Your Profile & Run History</a>
           </Menu.Item>
           }
           { this.props.isLoggedIn &&

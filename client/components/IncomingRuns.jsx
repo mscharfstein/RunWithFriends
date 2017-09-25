@@ -11,12 +11,9 @@ class IncomingRuns extends Component {
   }
 
   render() {
-    console.log('props', this.props)
     return (
-      <div className="container fluid">
-        {this.props.run.profile.firstName + ' ' + this.props.run.profile.lastName} wants to run with you!
-        <br>
-        </br>
+      <div>
+      <h3> <Icon> <img src='/favicon.ico' width="25px"/> </Icon> {this.props.run.profile.firstName + ' ' + this.props.run.profile.lastName} wants to run with you!</h3>
         <h4>Run details:</h4>
         <div>
         Neighborhood: {this.props.run.neighborhood}
@@ -30,8 +27,10 @@ class IncomingRuns extends Component {
         <div>
         Desired Time: {new Date(this.props.run.date).toDateString()}, {this.props.run.time}
         </div>
-        <Button onClick={(evt)=>this.props.handleAccept(evt, this.props.run, this.props.user.profileId)}>Accept!</Button>
-        <Button onClick={(evt)=>this.props.handleDecline(evt, this.props.run)}>Sorry, can't make it</Button>
+        <br>
+        </br>
+        <Button className="btn" color="green" size="small" onClick={(evt)=>this.props.handleAccept(evt, this.props.run, this.props.user.profile)}>Accept!</Button>
+        <Button className="btn" color="grey" size="small" onClick={(evt)=>this.props.handleDecline(evt, this.props.run, this.props.user.profile)}>Sorry, can't make it</Button>
       </div>
     );
   }
@@ -46,19 +45,19 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleAccept(evt, run, profileId) {
+    handleAccept(evt, run, profile) {
       dispatch(deleteRequest(run.id))
       dispatch(setIncomingReq([]))
 
-      run.currentUserId = profileId
+      run.currentUserId = profile.id
       dispatch(createRun(run))
-      dispatch(text(run.profile.phone, "Let's get running, see you soon!"))
+      dispatch(text(profile.phone, `${profile.firstName} ${profile.lastName} has accepted your run request. Your run is on ${run.date} at ${run.time} in ${run.neighborhood}. Enjoy your run with friends!`))
       history.push('/home')
     },
-    handleDecline(evt, run) {
+    handleDecline(evt, run, profile) {
       dispatch(deleteRequest(run.id))
       dispatch(setIncomingReq([]))
-      dispatch(text(run.profile.phone, "Sorry, I can't make it"))
+      dispatch(text(run.profile.phone, `Sorry, ${profile.name} can't join your run on ${run.date}. Log back onto Run With Friends to request another running buddy!`))
       history.push('/home')
     }
   }

@@ -21,24 +21,12 @@ export default class ScrollingModal extends Component {
   render() {
     const {header, content, btnMessage} = this.props;
     return (
-      <Modal open={this.state.open} closeIcon>
+      <Modal open={this.state.open} closeIcon onClose={this.close} size='tiny'>
       <Modal.Header>{header}</Modal.Header>
-      <Modal.Content image scrolling>
-        <Image
-          size='medium'
-          src='/assets/images/wireframe/image.png'
-          wrapped
-        />
+      <Modal.Content>
 
         {content}
 
-          {_.times(8, i => (
-            <Image
-              key={i}
-              src='/assets/images/wireframe/paragraph.png'
-              style={{ paddingBottom: 5 }}
-            />
-          ))}
       </Modal.Content>
     </Modal>
     )
@@ -46,7 +34,6 @@ export default class ScrollingModal extends Component {
 
   close() {
     this.setState({open: false})
-    history.push('/home')
   }
 }
 

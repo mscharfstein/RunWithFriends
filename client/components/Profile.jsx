@@ -17,12 +17,12 @@ export class Profile extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container fluid style={{padding:"1em 2em"}}>
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
-        <Grid.Column width={6} className='nurse-column'>
+        <Grid.Column width={5} className='nurse-column'>
           <EditProfile />
         </Grid.Column>
-        <Grid.Column width={10} className='patient-column'>
+        <Grid.Column width={11} className='patient-column'>
           <PastRuns />
         </Grid.Column>
       </Grid>

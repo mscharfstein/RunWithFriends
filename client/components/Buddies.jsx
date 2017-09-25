@@ -17,11 +17,18 @@ class Buddies extends Component {
 
   render() {
     return (
-      <Container fluid className='patient-column'>
-        <Header as='h3' textAlign='center'>Browse Possible Running Buddies:</Header>
+      <Container fluid style={{padding: "1em 2em"}}>
+      {!this.props.buddies.length &&
+        <Header as='h2' textAlign='center'>No one matches your criteria. Try requesting buddies for a different run.</Header>
+      }
+      {!!this.props.buddies.length &&
+        <div>
+        <Header as='h2' textAlign='center'>Browse Possible Running Buddies:</Header>
         <Card.Group itemsPerRow='3'>
           {this.renderBuddies()}
         </Card.Group>
+        </div>
+      }
       </Container>
     );
   }

@@ -31,10 +31,14 @@ class RateRun extends Component {
         <br>
         </br>
         <Form onSubmit={(evt, data)=>this.props.handleSubmit(evt, data, this.props.run.id)}>
-          <Form.Field control={Dropdown} label="Rating" placeholder="Great" options={[{key: "Great", value: "Great", text: "Great"},{key: "Good", value: "Good", text: "Good"},{key: "Fine", value: "Fine", text: "Fine"},{key: "Poor", value: "Poor", text: "Poor"}]} />
+
+        <br>
+        </br>
+        Provide number of stars:
+          <Form.Field control={Dropdown} placeholder="Great" options={[{key: "1", value: "1", text: "1"},{key: "2", value: "2", text: "2"},{key: "3", value: "3", text: "3"},{key: "4", value: "4", text: "4"},{key: "5", value: "5", text: "5"}]} />
 
           <Form.Field>
-          <Button primary type="submit">
+          <Button size='small' className='right-btn' primary type="submit">
           Submit<Icon name='right chevron' />
           </Button>
           </Form.Field>

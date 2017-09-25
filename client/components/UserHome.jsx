@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Grid, Container, Menu} from 'semantic-ui-react'
 import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun} from './index'
+import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun, CreateProfile} from './index'
 import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
+import history from '../history'
+
 /**
  * COMPONENT
  */
@@ -19,6 +21,12 @@ export class UserHome extends Component {
 
     return (
       <Container fluid>
+      {!this.props.user.id &&
+        history.push('/login')
+      }
+      {this.props.user && !this.props.user.profile &&
+        <CreateProfile />
+      }
       {this.props.incomingRequests.length &&
           <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
       }
