@@ -3,11 +3,6 @@ const db = require('../db')
 const Profile = require('./Profile')
 
 const Run = db.define('run', {
-  // id: {
-  //   type: Sequelize.INTEGER,
-  //   primaryKey: true,
-  //   autoIncrement: true
-  // },
   dist: {
     type: Sequelize.FLOAT
   },
@@ -25,6 +20,10 @@ const Run = db.define('run', {
   },
   comments: {
     type: Sequelize.TEXT
+  },
+  numberOfRatings: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 }, {
   defaultScope: {

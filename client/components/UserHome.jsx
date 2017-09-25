@@ -24,7 +24,7 @@ export class UserHome extends Component {
       {this.props.incomingRequests.length &&
           <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
       }
-      {new Date(Date.now()) > new Date(this.props.upcomingRun.date) &&
+      {new Date(Date.now()) > new Date(this.props.upcomingRun.date) && !this.props.upcomingRun.runUserDetails.rating &&
         <ScrollingModal header={'How was your run?'} content={<RateRun run={this.props.upcomingRun} profileId={this.props.user.profileId}/>} />
       }
       {this.props.user.id && !this.props.user.profile &&

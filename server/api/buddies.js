@@ -12,7 +12,7 @@ router.put('/find', (req, res, next) => {
 
   const time = findTime(req.body.time, req.body.AMPM)
   const speedInt = findSpeedInterval(req.body.prefSpeed)
-  // console.log('time', time, 'speedInt', speedInt, 'city', req.body.city, 'dist', req.body.prefDist, 'profileid', req.body.profileId)
+
   console.log('req.body', req.body, time, speedInt)
   Profile.findAll({
     where: {

@@ -25,36 +25,6 @@ router.post('/', (req, res, next) => {
   .then(() => res.sendStatus(201))
   .catch(next)
 
-  // const run1 = Run.create({
-  //   dist: +req.body.dist,
-  //   speed: req.body.speed,
-  //   date: new Date(req.body.date),
-  //   time: req.body.time,
-  //   status: "Upcoming",
-  //   profileId: req.body.profileId,
-  //   partnerId: req.body.requestedPartnerId
-  // })
-
-  // const run2 = Run.create({
-  //   dist: +req.body.dist,
-  //   speed: req.body.speed,
-  //   date: new Date(req.body.date),
-  //   time: req.body.time,
-  //   status: "Upcoming",
-  //   profileId: req.body.requestedPartnerId,
-  //   partnerId: req.body.profileId
-  // })
-
-  // Promise.all([run1, run2])
-  //   .then(runs => {
-  //     Run.findOne({
-  //       where: {
-  //         profileId: req.body.currentUserId
-  //       }
-  //     })
-  //     .then(run => res.json(run))
-  //   })
-  //   .catch(next)
 })
 
 router.get('/history/:profileId', (req, res, next) => {
@@ -70,14 +40,6 @@ router.get('/history/:profileId', (req, res, next) => {
   .then(completedRuns => res.json(completedRuns))
   .catch(next)
 
-  // Run.findAll({
-  //   where: {
-  //     profileId: req.params.profileId,
-  //     status: "Completed"
-  //   }
-  // })
-  //   .then(runs => res.json(runs))
-  //   .catch(next)
 })
 
 router.get('/upcoming/:profileId', (req, res, next) => {
@@ -91,34 +53,41 @@ router.get('/upcoming/:profileId', (req, res, next) => {
       return run.status === "Upcoming"
     })
   })
-  .then(upcomingRuns => res.json(upcomingRuns[0]))
+  .then(upcomingRuns => {
+    const soonestRun = upcomingRuns.reduce((a,b) => {
+      if (a.date < b.date) return a
+      else return b
+    })
+    res.json(soonestRun)
+  })
   .catch(next)
 
-
-  // Run.findOne({
-  //   where: {
-  //     profileId: req.params.profileId, //find where profile includes this id -- should switch to run id?
-  //     status: "Upcoming"
-  //   }
-  // })
-  //   .then(run => res.json(run))
-  //   .catch(next)
 })
 
 router.put('/upcoming/:runId', (req, res, next) => {
-  Run.update(
-    {status: "Completed"},
-    {where: {id: req.params.runId}})
+  Run.findById(req.params.runId)
+    .then(run => {
+      console.log('run', run.numberOfRatings)
+      const currRatings = +run.numberOfRatings
+      if (+run.numberOfRatings + 1 === run.profiles.length) {
+        console.log('currRatings', currRatings)
+        return run.update(
+          {numberOfRatings: +currRatings + 1, status: "Completed"})
+      }
+      else {
+        return run.update({numberOfRatings: +currRatings + 1})
+      }
+    })
     .then(() => {
-      return RunUserDetails.update(
+      RunUserDetails.update(
         {rating: +req.body.rating},
         {where: {
           runId: req.params.runId,
           profileId: req.body.profileId
         }})
-    })
-    .then(() => res.sendStatus(200))
-    .catch(next)
+      })
+      .then(() => res.sendStatus(200))
+      .catch(next)
 })
 
 router.put('/upcoming/:runId/join', (req, res, next) => {
@@ -154,18 +123,5 @@ router.get('/all/:profileId', (req, res, next) => {
     })
     .catch(next)
 
-  // Run.findAll({
-  //   where: {
-  //     profileId: {
-  //       $ne: req.params.profileId
-  //     },
-  //     partnerId: {
-  //       $ne: req.params.profileId
-  //     },
-  //     status: "Upcoming"
-  //   }
-  // })
-  //   .then(runs => res.json(runs))
-  //   .catch(next)
 })
 
