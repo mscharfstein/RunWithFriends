@@ -23,13 +23,23 @@ class Main extends Component {
           </Menu.Item>
           { this.props.isLoggedIn &&
           <Menu.Item>
-            <a href='/profile'>Your Profile & Run History</a>
+            <a href='/profile'>Your Profile & Run History
+            </a>
+
           </Menu.Item>
           }
           { this.props.isLoggedIn &&
           <Menu.Item>
-            <a href='/' onClick={this.props.handleClick}>Logout<small>{this.props.user}</small></a>
+            <a href='/' onClick={this.props.handleClick}>Logout
+            <br></br>
+            <small>{this.props.currentUser.email}</small>
+            </a>
           </Menu.Item>
+          }
+          { !this.props.isLoggedIn &&
+            <Menu.Item>
+              <a href='/login' onClick={this.props.handleClick}>Login or Sign Up</a>
+            </Menu.Item>
           }
         </Menu>
       </div>

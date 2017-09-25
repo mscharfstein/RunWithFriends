@@ -3,7 +3,7 @@ const db = require('../db')
 
 const RunUserDetails = db.define('runUserDetails', {
   rating: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   }
 })
 

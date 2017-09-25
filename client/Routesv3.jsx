@@ -23,15 +23,32 @@ export class Routes extends Component {
         <div className="container-fluid">
           <Main />
           <Switch>
-              <Route path='/login' component={Login} />
-              <Route path='/home' component={UserHome} />
-              <Route path='/buddies' component={Buddies} />
-              <Route path='/profile' component={Profile} />
-              <Route exact path='/' component={UserHome} />
+            {
+              isLoggedIn && hasProfile &&
+                <Switch>
+                  {/* Routes placed here are only available after logging in and creating profile */}
+                  <Route path='/home' component={UserHome} />
+                  <Route path='/buddies' component={Buddies} />
+                  <Route path='/profile' component={Profile} />
+                  <Route path='/' component={UserHome} />
+                </Switch>
+              }
+            {
+              isLoggedIn && !hasProfile &&
+                <Switch>
+                  {/* Routes placed here are only available after logging in, before creating profile */}
+                  <Route path='/home' component={CreateProfile} />
+                  <Route path='/' component={CreateProfile} />
+                </Switch>
+            }
+            {/* Displays our Login component as a fallback */}
+            <Route component={Login} />
           </Switch>
+
           </div>
         </Router>
     )
+
   }
 }
 

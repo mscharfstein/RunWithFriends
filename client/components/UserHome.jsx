@@ -21,21 +21,20 @@ export class UserHome extends Component {
 
     return (
       <Container fluid>
-      {!this.props.user.id &&
-        history.push('/login')
-      }
-      {this.props.user && !this.props.user.profile &&
-        <CreateProfile />
-      }
       {this.props.incomingRequests.length &&
           <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
       }
       {new Date(Date.now()) > new Date(this.props.upcomingRun.date) &&
         <ScrollingModal header={'How was your run?'} content={<RateRun run={this.props.upcomingRun} profileId={this.props.user.profileId}/>} />
       }
+      {this.props.user.id && !this.props.user.profile &&
+        <CreateProfile />
+      }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>
+        {!!this.props.allRuns.length &&
           <BrowseRuns />
+        }
         </Grid.Column>
         <Grid.Column width={6} className='nurse-column'>
           <RequestBuddyForm />
@@ -63,10 +62,12 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData(profileId) {
-      dispatch(fetchRequests(profileId))
-      dispatch(fetchPastRuns(profileId))
-      dispatch(fetchUpcomingRuns(profileId))
       dispatch(fetchAllRuns(profileId))
+      if (profileId) {
+        dispatch(fetchRequests(profileId))
+        dispatch(fetchPastRuns(profileId))
+        dispatch(fetchUpcomingRuns(profileId))
+      }
     }
   }
 }

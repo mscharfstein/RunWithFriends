@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form, Dropdown, Input, TextArea } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Dropdown, Input, TextArea, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { findBuddies, addRequestedRun } from '../store'
 import history from '../history'
@@ -15,7 +15,7 @@ export class RequestBuddyForm extends Component {
       city: '',
       neighborhoods: [],
       prefNeighborhood: '',
-      prefDist: +this.props.profile.prefDist,
+      prefDist: '',
       prefSpeed: '',
       time: '',
       AMPM: 'AM',
@@ -36,9 +36,9 @@ export class RequestBuddyForm extends Component {
   render() {
     const city_dropdown = this.getCityDropdown()
     const neighborhood_dropdown = this.getNeighborhoodDropdown()
-    console.log('rendering', this.state)
-    console.log(city_dropdown)
+
     return (
+      <div>
       <Form label="Going on a run? Find a buddy!" onSubmit={(evt) => this.props.handleSubmit(evt, this.state, this.props.user)}>
         <h2> Going on a run? Find a buddy! </h2>
         <h4>Where are you running?</h4>
@@ -48,7 +48,7 @@ export class RequestBuddyForm extends Component {
         </br>
 
         <h4>How far and how fast?</h4>
-        <Form.Field control={Input} label="Distance (in miles)" defaultValue={+this.props.profile.prefDist} onChange={this.handleChangeMiles} />
+        <Form.Field control={Input} label="Distance (in miles)" placeholder="4" onChange={this.handleChangeMiles} />
         <Form.Field control={Input} label="Speed (min per mile)" placeholder="9:30" onChange={this.handleChangeSpeed} />
         <br>
         </br>
@@ -62,11 +62,17 @@ export class RequestBuddyForm extends Component {
         </Form.Group>
         <br>
         </br>
-        <Form.Field control={Button} color="green">Submit</Form.Field>
+        {this.props.user.id &&
+          <Form.Field control={Button} color="green">Submit</Form.Field>
+        }
       </Form>
+      {!this.props.user.id &&
+        this.PopupSubmit()
+     }
+     </div>
     )
   }
-  //<DatePicker selected={this.state.day} onChange={this.handleChangeDay} />
+
   getCityDropdown() {
     return this.props.cities.map(city => {
       return {key: city.id,value: city.name,text: city.name}
@@ -114,6 +120,13 @@ export class RequestBuddyForm extends Component {
   handleChangeDate(evt, data) {
     this.setState({ date: new Date(data.value)})
   }
+
+  PopupSubmit = () => (
+    <Popup
+      trigger={<a href='/login'><Button color="grey">Submit</Button></a>}
+      content='Log in or sign up to request a buddy!'
+    />
+  )
 }
 
 const mapState = (state) => {
@@ -130,7 +143,6 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt, state, user) {
       // pass in only what needed
-      console.log('handle submit')
       state.profileId = user.profileId
       dispatch(findBuddies(state))
       dispatch(addRequestedRun(state))

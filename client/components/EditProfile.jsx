@@ -5,6 +5,12 @@ import { updateProfile } from '../store'
 
 export class CreateProfileForm extends Component {
 
+  componentWillUpdate(nextProps) {
+    if (this.props.cities !== nextProps.cities) {
+      this.getNeighborhoods(this.props.user.profile.city, nextProps.cities)
+    }
+  }
+
   constructor(props) {
     super(props)
     // maintain local state for input while writing
@@ -13,7 +19,7 @@ export class CreateProfileForm extends Component {
       lastName: this.props.user.profile.lastName,
       age: this.props.user.profile.age,
       city: this.props.user.profile.city,
-      neighborhoods: this.props.neighborhoods,
+      neighborhoods: [],
       prefNeighborhoods: this.props.user.profile.prefNeighborhoods,
       prefDist: this.props.user.profile.prefDist,
       prefSpeed: this.props.user.profile.prefSpeed,
@@ -22,6 +28,7 @@ export class CreateProfileForm extends Component {
       phone: this.props.user.profile.phone
     }
 
+    this.getNeighborhoods = this.getNeighborhoods.bind(this);
     this.getCityDropdown = this.getCityDropdown.bind(this);
     this.getMilesDropdown = this.getMilesDropdown.bind(this);
     this.getSpeedDropdown = this.getSpeedDropdown.bind(this);
@@ -46,7 +53,6 @@ export class CreateProfileForm extends Component {
     const miles_dropdown = this.getMilesDropdown()
     const speed_dropdown = this.getSpeedDropdown()
     const time_dropdown = this.getTimeDropdown()
-    console.log('this.state', this.state)
     return (
 
       <Form onSubmit={(evt) => this.props.handleSubmit(evt, this.state, this.props.user)}>
@@ -145,6 +151,14 @@ export class CreateProfileForm extends Component {
         text: time
       }
     })
+  }
+
+  getNeighborhoods(prefCity, cities) {
+
+    const city = cities.filter(city => {
+      return city.name === prefCity
+    })
+    this.setState({ neighborhoods: city[0].neighborhoods })
   }
 
   handleChangeFirstName(evt, data) {

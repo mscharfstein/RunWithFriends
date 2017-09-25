@@ -108,10 +108,10 @@ router.get('/upcoming/:profileId', (req, res, next) => {
 router.put('/upcoming/:runId', (req, res, next) => {
   Run.update(
     {status: "Completed"},
-  {where: {id: req.params.runId}})
+    {where: {id: req.params.runId}})
     .then(() => {
       return RunUserDetails.update(
-        {rating: req.body.rating},
+        {rating: +req.body.rating},
         {where: {
           runId: req.params.runId,
           profileId: req.body.profileId
@@ -122,7 +122,6 @@ router.put('/upcoming/:runId', (req, res, next) => {
 })
 
 router.put('/upcoming/:runId/join', (req, res, next) => {
-  console.log('req.body', req.body)
   RunUserDetails.create({
     runId: req.params.runId,
     profileId: req.body.profileId

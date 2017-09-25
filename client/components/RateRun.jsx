@@ -8,6 +8,12 @@ import {addBuddyToRunRequest, createRun, deleteRequest, setIncomingReq, text, ma
 class RateRun extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      rating: '4'
+    }
+
+    this.handleChangeRating = this.handleChangeRating.bind(this);
   }
 
   render() {
@@ -30,12 +36,12 @@ class RateRun extends Component {
         {header}
         <br>
         </br>
-        <Form onSubmit={(evt, data)=>this.props.handleSubmit(evt, data, this.props.run.id)}>
+        <Form onSubmit={(evt, data)=>this.props.handleSubmit(evt, data, this.props.run.id, this.props.profileId, this.state.rating)}>
 
         <br>
         </br>
         Provide number of stars:
-          <Form.Field control={Dropdown} placeholder="Great" options={[{key: "1", value: "1", text: "1"},{key: "2", value: "2", text: "2"},{key: "3", value: "3", text: "3"},{key: "4", value: "4", text: "4"},{key: "5", value: "5", text: "5"}]} />
+          <Form.Field control={Dropdown} placeholder="5" value={this.state.rating} options={[{key: "1", value: "1", text: "1"},{key: "2", value: "2", text: "2"},{key: "3", value: "3", text: "3"},{key: "4", value: "4", text: "4"},{key: "5", value: "5", text: "5"}]} onChange={this.handleChangeRating}/>
 
           <Form.Field>
           <Button size='small' className='right-btn' primary type="submit">
@@ -45,6 +51,10 @@ class RateRun extends Component {
           </Form>
       </div>
     );
+  }
+
+  handleChangeRating(evt) {
+    this.setState({rating: evt.target.value})
   }
 }
 
@@ -56,9 +66,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, data, runId) {
+    handleSubmit(evt, data, runId, profileId, rating) {
       // update upcoming run to make it completed instead of upcoming (backend, and remove from store)
-      dispatch(markAsComplete(runId))
+      dispatch(markAsComplete(runId, profileId, rating))
 
       // update run with new entries
       history.push('/home')

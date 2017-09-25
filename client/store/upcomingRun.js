@@ -35,9 +35,9 @@ export function fetchUpcomingRuns(profileId) {
     }
   }
 
-export function markAsComplete(runId) {
+export function markAsComplete(runId, profileId, rating) {
   return function thunk(dispatch) {
-    return axios.put(`/api/runs/upcoming/${runId}`)
+    return axios.put(`/api/runs/upcoming/${runId}`, {profileId, rating})
       .then(res => res.data)
       .then(run => {
         dispatch(setRun({}))

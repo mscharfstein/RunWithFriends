@@ -5884,6 +5884,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createBrowserHistory = __webpack_require__(303);
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
+var _createMemoryHistory = __webpack_require__(304);
+
+var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var history = process.env.NODE_ENV === 'test' ? (0, _createMemoryHistory2.default)() : (0, _createBrowserHistory2.default)();
+
+exports.default = history;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5921,7 +5947,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayMap = __webpack_require__(50),
@@ -5978,32 +6004,6 @@ function map(collection, iteratee) {
 
 module.exports = map;
 
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createBrowserHistory = __webpack_require__(303);
-
-var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
-
-var _createMemoryHistory = __webpack_require__(304);
-
-var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var history = process.env.NODE_ENV === 'test' ? (0, _createMemoryHistory2.default)() : (0, _createBrowserHistory2.default)();
-
-exports.default = history;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 27 */
@@ -32094,7 +32094,7 @@ module.exports = escapeTextContentForBrowser;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var DOMNamespaces = __webpack_require__(227);
 
 var WHITESPACE_TEST = /^[ \r\n\t\f]/;
@@ -33067,7 +33067,7 @@ var _lodash = __webpack_require__(67);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -36543,7 +36543,7 @@ module.exports = getEventTarget;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var useHasFeature;
 if (ExecutionEnvironment.canUseDOM) {
@@ -38466,7 +38466,7 @@ FeedContent.propTypes = process.env.NODE_ENV !== "production" ? {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
@@ -39937,7 +39937,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = __webpack_require__(23);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -40033,7 +40033,7 @@ var _lodash = __webpack_require__(67);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -57534,7 +57534,7 @@ module.exports = getHostComponentFromComposite;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var contentKey = null;
 
@@ -57891,7 +57891,7 @@ module.exports = isTextInputElement;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var escapeTextContentForBrowser = __webpack_require__(157);
 var setInnerHTML = __webpack_require__(158);
 
@@ -61290,7 +61290,7 @@ GridRow.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_invoke__);
@@ -61959,7 +61959,7 @@ MessageHeader.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__lib__[
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
@@ -62209,7 +62209,7 @@ TableHeaderCell.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -64333,7 +64333,7 @@ StepContent.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -65330,7 +65330,7 @@ DropdownSearchInput.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_invoke__);
@@ -67352,7 +67352,7 @@ CardContent.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -68298,7 +68298,7 @@ ItemContent.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -68565,7 +68565,7 @@ Statistic.Value = __WEBPACK_IMPORTED_MODULE_8__StatisticValue__["a" /* default *
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -69994,7 +69994,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -70045,21 +70045,11 @@ var Routes = exports.Routes = function (_Component) {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
-            isLoggedIn && hasProfile && _react2.default.createElement(
-              _reactRouterDom.Switch,
-              null,
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _components.UserHome }),
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/buddies', component: _components.Buddies }),
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _components.Profile }),
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _components.UserHome })
-            ),
-            isLoggedIn && !hasProfile && _react2.default.createElement(
-              _reactRouterDom.Switch,
-              null,
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _components.CreateProfile }),
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _components.CreateProfile })
-            ),
-            _react2.default.createElement(_reactRouterDom.Route, { component: _components.Login })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _components.Login }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _components.UserHome }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/buddies', component: _components.Buddies }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _components.Profile }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _components.UserHome })
           )
         )
       );
@@ -71632,6 +71622,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
   _inherits(CreateProfileForm, _Component);
 
+  _createClass(CreateProfileForm, [{
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps) {
+      if (this.props.cities !== nextProps.cities) {
+        this.getNeighborhoods(this.props.user.profile.city, nextProps.cities);
+      }
+    }
+  }]);
+
   function CreateProfileForm(props) {
     _classCallCheck(this, CreateProfileForm);
 
@@ -71643,7 +71642,7 @@ var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
       lastName: _this.props.user.profile.lastName,
       age: _this.props.user.profile.age,
       city: _this.props.user.profile.city,
-      neighborhoods: _this.props.neighborhoods,
+      neighborhoods: [],
       prefNeighborhoods: _this.props.user.profile.prefNeighborhoods,
       prefDist: _this.props.user.profile.prefDist,
       prefSpeed: _this.props.user.profile.prefSpeed,
@@ -71652,6 +71651,7 @@ var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
       phone: _this.props.user.profile.phone
     };
 
+    _this.getNeighborhoods = _this.getNeighborhoods.bind(_this);
     _this.getCityDropdown = _this.getCityDropdown.bind(_this);
     _this.getMilesDropdown = _this.getMilesDropdown.bind(_this);
     _this.getSpeedDropdown = _this.getSpeedDropdown.bind(_this);
@@ -71681,7 +71681,6 @@ var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
       var miles_dropdown = this.getMilesDropdown();
       var speed_dropdown = this.getSpeedDropdown();
       var time_dropdown = this.getTimeDropdown();
-      console.log('this.state', this.state);
       return _react2.default.createElement(
         _semanticUiReact.Form,
         { onSubmit: function onSubmit(evt) {
@@ -71807,6 +71806,15 @@ var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
       });
     }
   }, {
+    key: 'getNeighborhoods',
+    value: function getNeighborhoods(prefCity, cities) {
+
+      var city = cities.filter(function (city) {
+        return city.name === prefCity;
+      });
+      this.setState({ neighborhoods: city[0].neighborhoods });
+    }
+  }, {
     key: 'handleChangeFirstName',
     value: function handleChangeFirstName(evt, data) {
       this.setState({ firstName: data.value });
@@ -71907,7 +71915,7 @@ var _lodash = __webpack_require__(67);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -72303,11 +72311,21 @@ var Main = function (_Component) {
               'a',
               { href: '/', onClick: this.props.handleClick },
               'Logout',
+              _react2.default.createElement('br', null),
               _react2.default.createElement(
                 'small',
                 null,
-                this.props.user
+                this.props.currentUser.email
               )
+            )
+          ),
+          !this.props.isLoggedIn && _react2.default.createElement(
+            _semanticUiReact.Menu.Item,
+            null,
+            _react2.default.createElement(
+              'a',
+              { href: '/login', onClick: this.props.handleClick },
+              'Login or Sign Up'
             )
           )
         )
@@ -72494,9 +72512,9 @@ var Profile = exports.Profile = function (_Component) {
   }
 
   _createClass(Profile, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.loadInitialData(this.props.user.profile);
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps) {
+      if (this.props.user !== nextProps.user) this.props.loadInitialData(nextProps.user.profile);
     }
   }, {
     key: 'render',
@@ -72510,12 +72528,12 @@ var Profile = exports.Profile = function (_Component) {
           _react2.default.createElement(
             _semanticUiReact.Grid.Column,
             { width: 5, className: 'nurse-column' },
-            _react2.default.createElement(_index.EditProfile, null)
+            this.props.user.id && _react2.default.createElement(_index.EditProfile, null)
           ),
           _react2.default.createElement(
             _semanticUiReact.Grid.Column,
             { width: 11, className: 'patient-column' },
-            _react2.default.createElement(_index.PastRuns, null)
+            !!this.props.pastRuns.length && _react2.default.createElement(_index.PastRuns, null)
           )
         )
       );
@@ -72534,10 +72552,7 @@ var mapState = function mapState(state) {
   return {
     email: state.user.email,
     user: state.user,
-    incomingRequests: state.incomingRequests,
-    upcomingRun: state.upcomingRun,
     pastRuns: state.pastRuns,
-    allRuns: state.allRuns,
     neighborhoods: state.neighborhoods
   };
 };
@@ -72545,8 +72560,13 @@ var mapState = function mapState(state) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     loadInitialData: function loadInitialData(profile) {
-      dispatch((0, _store.fetchPastRuns)(profile.id));
-      dispatch((0, _store.fetchNeighborhoods)(profile.city));
+      //dispatch(me())
+      console.log('profile', profile);
+
+      if (profile) {
+        dispatch((0, _store.fetchPastRuns)(profile.id));
+        dispatch((0, _store.fetchNeighborhoods)(profile.city));
+      }
     }
   };
 };
@@ -72578,7 +72598,7 @@ var _lodash = __webpack_require__(67);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -72598,7 +72618,14 @@ var RateRun = function (_Component) {
   function RateRun(props) {
     _classCallCheck(this, RateRun);
 
-    return _possibleConstructorReturn(this, (RateRun.__proto__ || Object.getPrototypeOf(RateRun)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (RateRun.__proto__ || Object.getPrototypeOf(RateRun)).call(this, props));
+
+    _this.state = {
+      rating: '4'
+    };
+
+    _this.handleChangeRating = _this.handleChangeRating.bind(_this);
+    return _this;
   }
 
   _createClass(RateRun, [{
@@ -72628,11 +72655,11 @@ var RateRun = function (_Component) {
         _react2.default.createElement(
           _semanticUiReact.Form,
           { onSubmit: function onSubmit(evt, data) {
-              return _this2.props.handleSubmit(evt, data, _this2.props.run.id);
+              return _this2.props.handleSubmit(evt, data, _this2.props.run.id, _this2.props.profileId, _this2.state.rating);
             } },
           _react2.default.createElement('br', null),
           'Provide number of stars:',
-          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, placeholder: 'Great', options: [{ key: "1", value: "1", text: "1" }, { key: "2", value: "2", text: "2" }, { key: "3", value: "3", text: "3" }, { key: "4", value: "4", text: "4" }, { key: "5", value: "5", text: "5" }] }),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, placeholder: '5', value: this.state.rating, options: [{ key: "1", value: "1", text: "1" }, { key: "2", value: "2", text: "2" }, { key: "3", value: "3", text: "3" }, { key: "4", value: "4", text: "4" }, { key: "5", value: "5", text: "5" }], onChange: this.handleChangeRating }),
           _react2.default.createElement(
             _semanticUiReact.Form.Field,
             null,
@@ -72645,6 +72672,11 @@ var RateRun = function (_Component) {
           )
         )
       );
+    }
+  }, {
+    key: 'handleChangeRating',
+    value: function handleChangeRating(evt) {
+      this.setState({ rating: evt.target.value });
     }
   }]);
 
@@ -72659,9 +72691,9 @@ var mapState = function mapState(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    handleSubmit: function handleSubmit(evt, data, runId) {
+    handleSubmit: function handleSubmit(evt, data, runId, profileId, rating) {
       // update upcoming run to make it completed instead of upcoming (backend, and remove from store)
-      dispatch((0, _store.markAsComplete)(runId));
+      dispatch((0, _store.markAsComplete)(runId, profileId, rating));
 
       // update run with new entries
       _history2.default.push('/home');
@@ -72695,7 +72727,7 @@ var _reactRedux = __webpack_require__(23);
 
 var _store = __webpack_require__(22);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -72724,11 +72756,26 @@ var RequestBuddyForm = exports.RequestBuddyForm = function (_Component) {
     // maintain local state for input while writing
     var _this = _possibleConstructorReturn(this, (RequestBuddyForm.__proto__ || Object.getPrototypeOf(RequestBuddyForm)).call(this, props));
 
+    _this.PopupSubmit = function () {
+      return _react2.default.createElement(_semanticUiReact.Popup, {
+        trigger: _react2.default.createElement(
+          'a',
+          { href: '/login' },
+          _react2.default.createElement(
+            _semanticUiReact.Button,
+            { color: 'grey' },
+            'Submit'
+          )
+        ),
+        content: 'Log in or sign up to request a buddy!'
+      });
+    };
+
     _this.state = {
       city: '',
       neighborhoods: [],
       prefNeighborhood: '',
-      prefDist: +_this.props.profile.prefDist,
+      prefDist: '',
       prefSpeed: '',
       time: '',
       AMPM: 'AM',
@@ -72754,56 +72801,58 @@ var RequestBuddyForm = exports.RequestBuddyForm = function (_Component) {
 
       var city_dropdown = this.getCityDropdown();
       var neighborhood_dropdown = this.getNeighborhoodDropdown();
-      console.log('rendering', this.state);
-      console.log(city_dropdown);
+
       return _react2.default.createElement(
-        _semanticUiReact.Form,
-        { label: 'Going on a run? Find a buddy!', onSubmit: function onSubmit(evt) {
-            return _this2.props.handleSubmit(evt, _this2.state, _this2.props.user);
-          } },
+        'div',
+        null,
         _react2.default.createElement(
-          'h2',
-          null,
-          ' Going on a run? Find a buddy! '
+          _semanticUiReact.Form,
+          { label: 'Going on a run? Find a buddy!', onSubmit: function onSubmit(evt) {
+              return _this2.props.handleSubmit(evt, _this2.state, _this2.props.user);
+            } },
+          _react2.default.createElement(
+            'h2',
+            null,
+            ' Going on a run? Find a buddy! '
+          ),
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Where are you running?'
+          ),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'City', placeholder: 'Choose City', selectOnBlur: false, options: city_dropdown, onChange: this.handleChangeCity }),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Neighborhood', placeholder: 'Choose Neighborhood', selectOnBlur: false, options: neighborhood_dropdown, onChange: this.handleChangeNeigh }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'h4',
+            null,
+            'How far and how fast?'
+          ),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Distance (in miles)', placeholder: '4', onChange: this.handleChangeMiles }),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Speed (min per mile)', placeholder: '9:30', onChange: this.handleChangeSpeed }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'h4',
+            null,
+            'When you are going?'
+          ),
+          _react2.default.createElement(_semanticUiReact.Form.Field, { inline: true, control: _semanticUiReact.Input, label: 'Date', placeholder: new Date(Date.now()).toDateString(), onChange: this.handleChangeDate }),
+          _react2.default.createElement(
+            _semanticUiReact.Form.Group,
+            { inline: true },
+            _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Time', placeholder: '7:45', onChange: this.handleChangeTime }),
+            _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, value: 'AM', selectOnBlur: false, options: [{ key: "AM", value: "AM", text: "AM" }, { key: "PM", value: "PM", text: "PM" }], onChange: this.handleChangeAMPM })
+          ),
+          _react2.default.createElement('br', null),
+          this.props.user.id && _react2.default.createElement(
+            _semanticUiReact.Form.Field,
+            { control: _semanticUiReact.Button, color: 'green' },
+            'Submit'
+          )
         ),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Where are you running?'
-        ),
-        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'City', placeholder: 'Choose City', selectOnBlur: false, options: city_dropdown, onChange: this.handleChangeCity }),
-        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Neighborhood', placeholder: 'Choose Neighborhood', selectOnBlur: false, options: neighborhood_dropdown, onChange: this.handleChangeNeigh }),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'How far and how fast?'
-        ),
-        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Distance (in miles)', defaultValue: +this.props.profile.prefDist, onChange: this.handleChangeMiles }),
-        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Speed (min per mile)', placeholder: '9:30', onChange: this.handleChangeSpeed }),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          'h4',
-          null,
-          'When you are going?'
-        ),
-        _react2.default.createElement(_semanticUiReact.Form.Field, { inline: true, control: _semanticUiReact.Input, label: 'Date', placeholder: new Date(Date.now()).toDateString(), onChange: this.handleChangeDate }),
-        _react2.default.createElement(
-          _semanticUiReact.Form.Group,
-          { inline: true },
-          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Time', placeholder: '7:45', onChange: this.handleChangeTime }),
-          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, value: 'AM', selectOnBlur: false, options: [{ key: "AM", value: "AM", text: "AM" }, { key: "PM", value: "PM", text: "PM" }], onChange: this.handleChangeAMPM })
-        ),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement(
-          _semanticUiReact.Form.Field,
-          { control: _semanticUiReact.Button, color: 'green' },
-          'Submit'
-        )
+        !this.props.user.id && this.PopupSubmit()
       );
     }
-    //<DatePicker selected={this.state.day} onChange={this.handleChangeDay} />
-
   }, {
     key: 'getCityDropdown',
     value: function getCityDropdown() {
@@ -72879,7 +72928,6 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     handleSubmit: function handleSubmit(evt, state, user) {
       // pass in only what needed
-      console.log('handle submit');
       state.profileId = user.profileId;
       dispatch((0, _store.findBuddies)(state));
       dispatch((0, _store.addRequestedRun)(state));
@@ -72922,7 +72970,7 @@ var _index = __webpack_require__(173);
 
 var _store = __webpack_require__(22);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -72959,17 +73007,16 @@ var UserHome = exports.UserHome = function (_Component) {
       return _react2.default.createElement(
         _semanticUiReact.Container,
         { fluid: true },
-        !this.props.user.id && _history2.default.push('/login'),
-        this.props.user && !this.props.user.profile && _react2.default.createElement(_index.CreateProfile, null),
         this.props.incomingRequests.length && _react2.default.createElement(_index.ScrollingModal, { header: 'You Have An Incoming Run Request!', content: _react2.default.createElement(_index.IncomingRuns, { run: this.props.incomingRequests[0] }) }),
         new Date(Date.now()) > new Date(this.props.upcomingRun.date) && _react2.default.createElement(_index.ScrollingModal, { header: 'How was your run?', content: _react2.default.createElement(_index.RateRun, { run: this.props.upcomingRun, profileId: this.props.user.profileId }) }),
+        this.props.user.id && !this.props.user.profile && _react2.default.createElement(_index.CreateProfile, null),
         _react2.default.createElement(
           _semanticUiReact.Grid,
           { columns: 2, divided: true, padded: 'horizontally', relaxed: true, className: 'main-grid' },
           _react2.default.createElement(
             _semanticUiReact.Grid.Column,
             { width: 10, className: 'patient-column' },
-            _react2.default.createElement(_index.BrowseRuns, null)
+            !!this.props.allRuns.length && _react2.default.createElement(_index.BrowseRuns, null)
           ),
           _react2.default.createElement(
             _semanticUiReact.Grid.Column,
@@ -73003,10 +73050,12 @@ var mapState = function mapState(state) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     loadInitialData: function loadInitialData(profileId) {
-      dispatch((0, _store.fetchRequests)(profileId));
-      dispatch((0, _store.fetchPastRuns)(profileId));
-      dispatch((0, _store.fetchUpcomingRuns)(profileId));
       dispatch((0, _store.fetchAllRuns)(profileId));
+      if (profileId) {
+        dispatch((0, _store.fetchRequests)(profileId));
+        dispatch((0, _store.fetchPastRuns)(profileId));
+        dispatch((0, _store.fetchUpcomingRuns)(profileId));
+      }
     }
   };
 };
@@ -73090,7 +73139,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73153,7 +73202,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73210,7 +73259,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73275,7 +73324,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73338,7 +73387,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73402,7 +73451,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73468,7 +73517,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73559,7 +73608,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -73601,9 +73650,9 @@ function fetchUpcomingRuns(profileId) {
   };
 }
 
-function markAsComplete(runId) {
+function markAsComplete(runId, profileId, rating) {
   return function thunk(dispatch) {
-    return _axios2.default.put('/api/runs/upcoming/' + runId).then(function (res) {
+    return _axios2.default.put('/api/runs/upcoming/' + runId, { profileId: profileId, rating: rating }).then(function (res) {
       return res.data;
     }).then(function (run) {
       dispatch(setRun({}));
@@ -73658,7 +73707,7 @@ var _axios = __webpack_require__(48);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _history = __webpack_require__(26);
+var _history = __webpack_require__(24);
 
 var _history2 = _interopRequireDefault(_history);
 
@@ -79021,7 +79070,7 @@ module.exports = createArrayFromMixed;
 
 /*eslint-disable fb-www/unsafe-html*/
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var createArrayFromMixed = __webpack_require__(755);
 var getMarkupWrap = __webpack_require__(757);
@@ -79110,7 +79159,7 @@ module.exports = createNodesFromMarkup;
 
 /*eslint-disable fb-www/unsafe-html */
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var invariant = __webpack_require__(7);
 
@@ -79431,7 +79480,7 @@ module.exports = memoizeStringOnly;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var performance;
 
@@ -86563,7 +86612,7 @@ module.exports = func;
 /***/ (function(module, exports, __webpack_require__) {
 
 var convert = __webpack_require__(18),
-    func = convert('map', __webpack_require__(25));
+    func = convert('map', __webpack_require__(26));
 
 func.placeholder = __webpack_require__(17);
 module.exports = func;
@@ -88545,7 +88594,7 @@ module.exports = AutoFocusUtils;
 
 
 var EventPropagators = __webpack_require__(106);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var FallbackCompositionState = __webpack_require__(977);
 var SyntheticCompositionEvent = __webpack_require__(1020);
 var SyntheticInputEvent = __webpack_require__(1023);
@@ -88934,7 +88983,7 @@ module.exports = BeforeInputEventPlugin;
 
 
 var CSSProperty = __webpack_require__(492);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var ReactInstrumentation = __webpack_require__(41);
 
 var camelizeStyleName = __webpack_require__(753);
@@ -89156,7 +89205,7 @@ module.exports = CSSPropertyOperations;
 
 var EventPluginHub = __webpack_require__(105);
 var EventPropagators = __webpack_require__(106);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var ReactDOMComponentTree = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(46);
 var SyntheticEvent = __webpack_require__(57);
@@ -89474,7 +89523,7 @@ module.exports = ChangeEventPlugin;
 var _prodInvariant = __webpack_require__(14);
 
 var DOMLazyTree = __webpack_require__(89);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var createNodesFromMarkup = __webpack_require__(756);
 var emptyFunction = __webpack_require__(37);
@@ -91148,7 +91197,7 @@ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVT
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ExecutionEnvironment = __webpack_require__(24);
+  var ExecutionEnvironment = __webpack_require__(25);
   if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
     // First check if devtools is not installed
     if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
@@ -92964,7 +93013,7 @@ module.exports = ReactDOMOption;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var getNodeForCharacterOffset = __webpack_require__(1035);
 var getTextContentAccessor = __webpack_require__(508);
@@ -93779,7 +93828,7 @@ module.exports = ReactDOMUnknownPropertyHook;
 var ReactInvalidSetStateWarningHook = __webpack_require__(1005);
 var ReactHostOperationHistoryHook = __webpack_require__(1003);
 var ReactComponentTreeHook = __webpack_require__(35);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 var performanceNow = __webpack_require__(765);
 var warning = __webpack_require__(12);
@@ -94371,7 +94420,7 @@ module.exports = ReactEventEmitterMixin;
 var _assign = __webpack_require__(19);
 
 var EventListener = __webpack_require__(298);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var PooledClass = __webpack_require__(77);
 var ReactDOMComponentTree = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(46);
@@ -96132,7 +96181,7 @@ module.exports = SVGDOMPropertyConfig;
 
 
 var EventPropagators = __webpack_require__(106);
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 var ReactDOMComponentTree = __webpack_require__(20);
 var ReactInputSelection = __webpack_require__(500);
 var SyntheticEvent = __webpack_require__(57);
@@ -97664,7 +97713,7 @@ module.exports = getNodeForCharacterOffset;
 
 
 
-var ExecutionEnvironment = __webpack_require__(24);
+var ExecutionEnvironment = __webpack_require__(25);
 
 /**
  * Generate a mapping of standard vendor prefixes using the defined style property and event name.
@@ -102982,7 +103031,7 @@ Message.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
@@ -103670,7 +103719,7 @@ Header.Subheader = __WEBPACK_IMPORTED_MODULE_8__HeaderSubheader__["a" /* default
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_includes__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_includes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_includes__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_invoke__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_invoke___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_lodash_invoke__);
@@ -103968,7 +104017,7 @@ Input.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__lib__["j" /* 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_invoke___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_invoke__);
@@ -107385,7 +107434,7 @@ Dimmer.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__lib__["j" /* 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_compact__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_compact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_compact__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_every__ = __webpack_require__(914);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_every___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_lodash_every__);
@@ -110214,7 +110263,7 @@ Rating.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_partialRight___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_lodash_partialRight__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_inRange__ = __webpack_require__(940);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_inRange___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_lodash_inRange__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash_get__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_lodash_get__);
@@ -111407,7 +111456,7 @@ Sticky.propTypes = process.env.NODE_ENV !== "production" ? {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_get__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_get__);
@@ -111829,7 +111878,7 @@ Comment.Text = __WEBPACK_IMPORTED_MODULE_12__CommentText__["a" /* default */];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_classnames__);
