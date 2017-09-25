@@ -11,16 +11,18 @@ class BrowseRuns extends Component {
   render() {
     return (
       <div>
-        <Header as='h3' textAlign='center'>All Upcoming Runs</Header>
+        <Header as='h2' textAlign='center'>All Upcoming Runs</Header>
+
         {!!this.props.allRuns.length &&
         <Card.Group itemsPerRow='2'>
           {_.map(this.props.allRuns, run => {
-            return <Run key={run.id} run={run} yourRun={false}/>
+            return <Run key={run.id} run={run} profile={this.props.user.profile} yourRun={false}/>
           })}
         </Card.Group>
         }
         {
-          !this.props.allRuns.length && "There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends!"
+          !this.props.allRuns.length &&
+          <h3> There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends! </h3>
         }
       </div>
     );
@@ -42,6 +44,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-
-//wires up fetchNurses to be a prop as action creator for component
 export default connect(mapStatetoProps, mapDispatchToProps)(BrowseRuns);

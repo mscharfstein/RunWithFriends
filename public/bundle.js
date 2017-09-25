@@ -6009,6 +6009,18 @@ Object.keys(_allRuns).forEach(function (key) {
   });
 });
 
+var _neighborhoods = __webpack_require__(1175);
+
+Object.keys(_neighborhoods).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _neighborhoods[key];
+    }
+  });
+});
+
 var _redux = __webpack_require__(535);
 
 var _reduxLogger = __webpack_require__(1073);
@@ -6022,6 +6034,8 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 var _user2 = _interopRequireDefault(_user);
 
 var _cities2 = _interopRequireDefault(_cities);
+
+var _neighborhoods2 = _interopRequireDefault(_neighborhoods);
 
 var _buddies2 = _interopRequireDefault(_buddies);
 
@@ -6037,7 +6051,7 @@ var _allRuns2 = _interopRequireDefault(_allRuns);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reducer = (0, _redux.combineReducers)({ user: _user2.default, cities: _cities2.default, buddies: _buddies2.default, requestedRun: _requestedRuns2.default, incomingRequests: _incomingRequests2.default, upcomingRun: _upcomingRun2.default, pastRuns: _pastRuns2.default, allRuns: _allRuns2.default });
+var reducer = (0, _redux.combineReducers)({ user: _user2.default, cities: _cities2.default, buddies: _buddies2.default, requestedRun: _requestedRuns2.default, incomingRequests: _incomingRequests2.default, upcomingRun: _upcomingRun2.default, pastRuns: _pastRuns2.default, allRuns: _allRuns2.default, neighborhoods: _neighborhoods2.default });
 var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)({ collapsed: true }));
 var store = (0, _redux.createStore)(reducer, middleware);
 
@@ -33053,6 +33067,12 @@ var _lodash = __webpack_require__(67);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _history = __webpack_require__(28);
+
+var _history2 = _interopRequireDefault(_history);
+
+var _store = __webpack_require__(27);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33078,30 +33098,31 @@ var Run = function (_Component) {
       var header = '';
       var runParticipants = '';
       var yourRunDetails = {};
+
+      var partners = this.props.run.profiles.filter(function (profile) {
+        return +profile.id !== +_this2.props.profileId;
+      });
+
+      var partnersNames = partners.map(function (partner) {
+        return partner.firstName + ' ' + partner.lastName;
+      });
+
       // change this to loop through the profiles in the run
       if (this.props.yourRun) {
-        console.log(this.props.run);
-        var partners = this.props.run.profiles.map(function (profile) {
-          if (+profile.id !== +_this2.props.profileId) return profile.firstName + ' ' + profile.lastName;
-          return '';
-        });
-        runParticipants = 'Partner(s): ' + partners.join("& ");
-        header = 'Run with ' + partners.join(" & ") + ' on ' + new Date(this.props.run.date).toDateString();
+
+        runParticipants = 'Partner(s): ' + partnersNames.join(" & ");
+        header = 'Run with ' + partnersNames.join(" & ") + ' on ' + new Date(this.props.run.date).toDateString();
         var yourRunProfile = this.props.run.profiles.filter(function (profile) {
           return +profile.id === +_this2.props.profileId;
         });
-        console.log('yourrunprofile', yourRunProfile);
         yourRunDetails = yourRunProfile[0].runUserDetails;
-        console.log('yourRunDetails', yourRunDetails);
       }
 
       // change this to loop through the profiles on the run
       else {
-          var participants = this.props.run.profiles.map(function (profile) {
-            return profile.firstName + ' ' + profile.lastName;
-          });
 
-          runParticipants = 'Participants: ' + participants.join("& ");
+          runParticipants = 'Participants: ' + partnersNames.join(" & ");
+
           header = 'Upcoming Run in ' + this.props.run.neighborhood + ' on ' + new Date(this.props.run.date).toDateString();
         }
 
@@ -33166,7 +33187,9 @@ var Run = function (_Component) {
               { className: 'join-run' },
               _react2.default.createElement(
                 _semanticUiReact.Button,
-                { color: 'green' },
+                { onClick: function onClick(evt, data) {
+                    return _this2.props.handleJoinRun(evt, data, partners, _this2.props.run, _this2.props.profile);
+                  }, color: 'green' },
                 '+'
               )
             )
@@ -33179,7 +33202,20 @@ var Run = function (_Component) {
   return Run;
 }(_react.Component);
 
-exports.default = Run;
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    handleJoinRun: function handleJoinRun(evt, data, partners, run, profile) {
+      dispatch((0, _store.joinUpcomingRun)(run.id, profile.id));
+
+      partners.map(function (partner) {
+        dispatch((0, _store.text)(partner.phone, profile.firstName + ' ' + profile.lastName + ' will join your run on ' + new Date(run.date).toDateString() + '!'));
+      });
+      _history2.default.push('/home');
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatch)(Run);
 
 /***/ }),
 /* 173 */
@@ -33315,6 +33351,15 @@ Object.defineProperty(exports, 'Profile', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Profile).default;
+  }
+});
+
+var _EditProfile = __webpack_require__(1174);
+
+Object.defineProperty(exports, 'EditProfile', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_EditProfile).default;
   }
 });
 
@@ -40049,19 +40094,22 @@ var User = function (_Component) {
             _react2.default.createElement(
               _semanticUiReact.List,
               { size: 'tiny' },
-              'Phone Number:'
+              'Phone Number: ',
+              this.props.buddy.phone
             ),
             _react2.default.createElement(
               'div',
               { className: 'text right' },
               'Speed: ',
-              this.props.buddy.prefSpeed
+              this.props.buddy.prefSpeed,
+              ' minutes per mile'
             ),
             _react2.default.createElement(
               'div',
               { className: 'text right' },
               'Distance: ',
-              this.props.buddy.prefDist
+              this.props.buddy.prefDist,
+              ' miles'
             ),
             _react2.default.createElement(
               'div',
@@ -71076,22 +71124,28 @@ var BrowseRuns = function (_Component) {
   _createClass(BrowseRuns, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           _semanticUiReact.Header,
-          { as: 'h3', textAlign: 'center' },
+          { as: 'h2', textAlign: 'center' },
           'All Upcoming Runs'
         ),
         !!this.props.allRuns.length && _react2.default.createElement(
           _semanticUiReact.Card.Group,
           { itemsPerRow: '2' },
           _lodash2.default.map(this.props.allRuns, function (run) {
-            return _react2.default.createElement(_Run2.default, { key: run.id, run: run, yourRun: false });
+            return _react2.default.createElement(_Run2.default, { key: run.id, run: run, profile: _this2.props.user.profile, yourRun: false });
           })
         ),
-        !this.props.allRuns.length && "There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends!"
+        !this.props.allRuns.length && _react2.default.createElement(
+          'h3',
+          null,
+          ' There are no currently scheduled runs. Request a running buddy to experience the joy of running with friends! '
+        )
       );
     }
   }]);
@@ -71114,7 +71168,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-//wires up fetchNurses to be a prop as action creator for component
 exports.default = (0, _reactRedux.connect)(mapStatetoProps, mapDispatchToProps)(BrowseRuns);
 
 /***/ }),
@@ -71170,9 +71223,7 @@ var Buddies = function (_Component) {
   _createClass(Buddies, [{
     key: 'renderBuddies',
     value: function renderBuddies() {
-      console.log('rendering buddies', this.props.buddies);
       return _lodash2.default.map(_lodash2.default.filter(this.props.buddies), function (buddy) {
-        //return _.map(this.props.patients, patient=>{
         return _react2.default.createElement(_User2.default, { key: buddy.id, buddy: buddy });
       });
     }
@@ -71820,7 +71871,7 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { href: '/auth/google' },
-                  ' Sign Up with Google'
+                  ' Sign Up or Log in with Google'
                 )
               )
             )
@@ -72045,7 +72096,7 @@ var PastRuns = function (_Component) {
         null,
         _react2.default.createElement(
           _semanticUiReact.Header,
-          { as: 'h3', textAlign: 'center' },
+          { as: 'h2', textAlign: 'center' },
           'Your Past Runs'
         ),
         !!this.props.pastRuns.length && _react2.default.createElement(
@@ -72055,7 +72106,11 @@ var PastRuns = function (_Component) {
             return _react2.default.createElement(_Run2.default, { key: run.id, run: run, profileId: _this2.props.user.profileId, yourRun: true });
           })
         ),
-        !this.props.pastRuns.length && "You haven't gone on any runs yet. Request a running buddy to experience the joy of running with friends!"
+        !this.props.pastRuns.length && _react2.default.createElement(
+          'h3',
+          null,
+          ' You haven\'t gone on any runs yet. Request a running buddy to experience the joy of running with friends! '
+        )
       );
     }
   }]);
@@ -72070,7 +72125,6 @@ function mapStatetoProps(state) {
   };
 }
 
-//wires up fetchNurses to be a prop as action creator for component
 exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PastRuns);
 
 /***/ }),
@@ -72129,8 +72183,7 @@ var Profile = exports.Profile = function (_Component) {
   _createClass(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('mounting', this.props.user.profileId);
-      this.props.loadInitialData(this.props.user.profileId);
+      this.props.loadInitialData(this.props.user.profile);
     }
   }, {
     key: 'render',
@@ -72141,10 +72194,14 @@ var Profile = exports.Profile = function (_Component) {
         _react2.default.createElement(
           _semanticUiReact.Grid,
           { columns: 2, divided: true, padded: 'horizontally', relaxed: true, className: 'main-grid' },
-          _react2.default.createElement(_semanticUiReact.Grid.Column, { width: 6, className: 'patient-column' }),
           _react2.default.createElement(
             _semanticUiReact.Grid.Column,
-            { width: 10, className: 'nurse-column' },
+            { width: 6, className: 'nurse-column' },
+            _react2.default.createElement(_index.EditProfile, null)
+          ),
+          _react2.default.createElement(
+            _semanticUiReact.Grid.Column,
+            { width: 10, className: 'patient-column' },
             _react2.default.createElement(_index.PastRuns, null)
           )
         )
@@ -72167,15 +72224,16 @@ var mapState = function mapState(state) {
     incomingRequests: state.incomingRequests,
     upcomingRun: state.upcomingRun,
     pastRuns: state.pastRuns,
-    allRuns: state.allRuns
+    allRuns: state.allRuns,
+    neighborhoods: state.neighborhoods
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    loadInitialData: function loadInitialData(profileId) {
-      console.log('fetcthing with profid', profileId);
-      dispatch((0, _store.fetchPastRuns)(profileId));
+    loadInitialData: function loadInitialData(profile) {
+      dispatch((0, _store.fetchPastRuns)(profile.id));
+      dispatch((0, _store.fetchNeighborhoods)(profile.city));
     }
   };
 };
@@ -72227,34 +72285,49 @@ var RateRun = function (_Component) {
   function RateRun(props) {
     _classCallCheck(this, RateRun);
 
-    var _this = _possibleConstructorReturn(this, (RateRun.__proto__ || Object.getPrototypeOf(RateRun)).call(this, props));
-
-    _this.getNeighborhoodDropdown = _this.getNeighborhoodDropdown.bind(_this);
-
-    return _this;
+    return _possibleConstructorReturn(this, (RateRun.__proto__ || Object.getPrototypeOf(RateRun)).call(this, props));
   }
 
   _createClass(RateRun, [{
     key: 'render',
     value: function render() {
-      var partner = {};
-      if (this.props.user.profileId === this.props.run.profileId) partner = this.props.run.partner;else partner = this.props.run.profile;
+      var _this2 = this;
+
+      var header = '';
+      var runParticipants = '';
+
+      var partners = this.props.run.profiles.filter(function (profile) {
+        return +profile.id !== +_this2.props.profileId;
+      });
+
+      var partnersNames = partners.map(function (partner) {
+        return partner.firstName + ' ' + partner.lastName;
+      });
+
+      runParticipants = 'Partner(s): ' + partnersNames.join(" & ");
+      header = 'Tell us how your ' + this.props.run.dist + ' mile run with ' + partnersNames.join(" & ") + ' on ' + new Date(this.props.run.date).toDateString() + ' in ' + this.props.run.neighborhood + ' went!';
 
       return _react2.default.createElement(
         'div',
         { className: 'container fluid' },
-        'Tell us how your run with ',
-        partner.firstName + ' ' + partner.lastName,
-        ' went!',
+        header,
         _react2.default.createElement('br', null),
         _react2.default.createElement(
-          Form,
-          { onSubmit: this.props.handleSubmit },
-          'Edit run details:',
-          _react2.default.createElement(Form.Field, { control: Inpur, label: 'Neighborhood', defaultValue: this.props.run.neighborhood }),
-          _react2.default.createElement(Form.Field, { control: Input, label: 'Actual Distance (miles)', defaultValue: this.props.run.dist }),
-          _react2.default.createElement(Form.Field, { control: Input, label: 'Actual Speed (min per mile)', defaultValue: this.props.run.speed }),
-          _react2.default.createElement(Form.Field, { control: Input, label: 'Rating', placeholder: 'Great', options: [{ key: "Great", value: "Great", text: "Great" }, { key: "Good", value: "Good", text: "Good" }, { key: "Fine", value: "Fine", text: "Fine" }, { key: "Poor", value: "Poor", text: "Poor" }] })
+          _semanticUiReact.Form,
+          { onSubmit: function onSubmit(evt, data) {
+              return _this2.props.handleSubmit(evt, data, _this2.props.run.id);
+            } },
+          _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Rating', placeholder: 'Great', options: [{ key: "Great", value: "Great", text: "Great" }, { key: "Good", value: "Good", text: "Good" }, { key: "Fine", value: "Fine", text: "Fine" }, { key: "Poor", value: "Poor", text: "Poor" }] }),
+          _react2.default.createElement(
+            _semanticUiReact.Form.Field,
+            null,
+            _react2.default.createElement(
+              _semanticUiReact.Button,
+              { primary: true, type: 'submit' },
+              'Submit',
+              _react2.default.createElement(_semanticUiReact.Icon, { name: 'right chevron' })
+            )
+          )
         )
       );
     }
@@ -72265,15 +72338,15 @@ var RateRun = function (_Component) {
 
 var mapState = function mapState(state) {
   return {
-    user: state.user,
-    neighborhoods: state.neighborhoods
+    upcomingRun: state.upcomingRun
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    handleSubmit: function handleSubmit(evt, data) {
+    handleSubmit: function handleSubmit(evt, data, runId) {
       // update upcoming run to make it completed instead of upcoming (backend, and remove from store)
+      dispatch((0, _store.markAsComplete)(runId));
 
       // update run with new entries
       _history2.default.push('/home');
@@ -72500,10 +72573,128 @@ exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(RequestBuddyFo
 
 /***/ }),
 /* 668 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: Unexpected token (18:9)\n\n\u001b[0m \u001b[90m 16 | \u001b[39m  }\n \u001b[90m 17 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 18 | \u001b[39m  console\u001b[33m.\u001b[39mlog(\u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mkeys(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mupcomingRun)\u001b[33m.\u001b[39mlength \u001b[33m&&\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mDate\u001b[39m(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mupcomingRun\u001b[33m.\u001b[39mdate) \u001b[33m>\u001b[39m \u001b[33mDate\u001b[39m\u001b[33m.\u001b[39mnow())\n \u001b[90m    | \u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 19 | \u001b[39m  render() {\n \u001b[90m 20 | \u001b[39m    \u001b[36mreturn\u001b[39m (\n \u001b[90m 21 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mContainer\u001b[39m fluid\u001b[33m>\u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UserHome = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__(24);
+
+var _semanticUiReact = __webpack_require__(31);
+
+var _reactRouterDom = __webpack_require__(45);
+
+var _index = __webpack_require__(173);
+
+var _store = __webpack_require__(27);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * COMPONENT
+ */
+
+var UserHome = exports.UserHome = function (_Component) {
+  _inherits(UserHome, _Component);
+
+  function UserHome() {
+    _classCallCheck(this, UserHome);
+
+    return _possibleConstructorReturn(this, (UserHome.__proto__ || Object.getPrototypeOf(UserHome)).apply(this, arguments));
+  }
+
+  _createClass(UserHome, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.loadInitialData(this.props.user.profileId);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        _semanticUiReact.Container,
+        { fluid: true },
+        this.props.incomingRequests.length && _react2.default.createElement(_index.ScrollingModal, { header: 'You Have An Incoming Run Request!', content: _react2.default.createElement(_index.IncomingRuns, { run: this.props.incomingRequests[0] }) }),
+        new Date(Date.now()) > new Date(this.props.upcomingRun.date) && _react2.default.createElement(_index.ScrollingModal, { header: 'How was your run?', content: _react2.default.createElement(_index.RateRun, { run: this.props.upcomingRun, profileId: this.props.user.profileId }) }),
+        _react2.default.createElement(
+          _semanticUiReact.Grid,
+          { columns: 2, divided: true, padded: 'horizontally', relaxed: true, className: 'main-grid' },
+          _react2.default.createElement(
+            _semanticUiReact.Grid.Column,
+            { width: 10, className: 'patient-column' },
+            _react2.default.createElement(_index.BrowseRuns, null)
+          ),
+          _react2.default.createElement(
+            _semanticUiReact.Grid.Column,
+            { width: 6, className: 'nurse-column' },
+            _react2.default.createElement(_index.RequestBuddyForm, null)
+          )
+        )
+      );
+    }
+  }]);
+
+  return UserHome;
+}(_react.Component);
+
+/**
+ * CONTAINER
+ */
+
+
+var mapState = function mapState(state) {
+  return {
+    email: state.user.email,
+    user: state.user,
+    incomingRequests: state.incomingRequests,
+    upcomingRun: state.upcomingRun,
+    pastRuns: state.pastRuns,
+    allRuns: state.allRuns
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    loadInitialData: function loadInitialData(profileId) {
+      dispatch((0, _store.fetchRequests)(profileId));
+      dispatch((0, _store.fetchPastRuns)(profileId));
+      dispatch((0, _store.fetchUpcomingRuns)(profileId));
+      dispatch((0, _store.fetchAllRuns)(profileId));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(UserHome);
+
+/**
+ * PROP TYPES
+ */
+
+UserHome.propTypes = {
+  email: _propTypes2.default.string
+};
 
 /***/ }),
 /* 669 */
@@ -72961,6 +73152,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.createRun = createRun;
 exports.fetchUpcomingRuns = fetchUpcomingRuns;
 exports.markAsComplete = markAsComplete;
+exports.joinUpcomingRun = joinUpcomingRun;
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -73026,6 +73218,16 @@ function markAsComplete(runId) {
       return res.data;
     }).then(function (run) {
       dispatch(setRun({}));
+    });
+  };
+}
+
+function joinUpcomingRun(runId, profileId) {
+  return function thunk(dispatch) {
+    return _axios2.default.put('/api/runs/upcoming/' + runId + '/join', { profileId: profileId }).then(function (res) {
+      return res.data;
+    }).then(function (run) {
+      dispatch(setRun(run));
     });
   };
 }
@@ -112077,6 +112279,339 @@ function toArray(list, index) {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 1174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CreateProfileForm = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = __webpack_require__(31);
+
+var _reactRedux = __webpack_require__(24);
+
+var _store = __webpack_require__(27);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CreateProfileForm = exports.CreateProfileForm = function (_Component) {
+  _inherits(CreateProfileForm, _Component);
+
+  function CreateProfileForm(props) {
+    _classCallCheck(this, CreateProfileForm);
+
+    // maintain local state for input while writing
+    var _this = _possibleConstructorReturn(this, (CreateProfileForm.__proto__ || Object.getPrototypeOf(CreateProfileForm)).call(this, props));
+
+    _this.state = {
+      firstName: _this.props.user.profile.firstName,
+      lastName: _this.props.user.profile.lastName,
+      age: _this.props.user.profile.age,
+      city: _this.props.user.profile.city,
+      neighborhoods: _this.props.neighborhoods,
+      prefNeighborhoods: _this.props.user.profile.prefNeighborhoods,
+      prefDist: _this.props.user.profile.prefDist,
+      prefSpeed: _this.props.user.profile.prefSpeed,
+      prefWeekdayTime: _this.props.user.profile.prefWeekdayTime,
+      prefWeekendTime: _this.props.user.profile.prefWeekendTime,
+      phone: _this.props.user.profile.phone
+    };
+
+    _this.getCityDropdown = _this.getCityDropdown.bind(_this);
+    _this.getMilesDropdown = _this.getMilesDropdown.bind(_this);
+    _this.getSpeedDropdown = _this.getSpeedDropdown.bind(_this);
+    _this.getNeighborhoodDropdown = _this.getNeighborhoodDropdown.bind(_this);
+    _this.getTimeDropdown = _this.getTimeDropdown.bind(_this);
+
+    _this.handleChangeAge = _this.handleChangeAge.bind(_this);
+    _this.handleChangeFirstName = _this.handleChangeFirstName.bind(_this);
+    _this.handleChangeLastName = _this.handleChangeLastName.bind(_this);
+    _this.handleChangeCity = _this.handleChangeCity.bind(_this);
+    _this.handleChangeNeigh = _this.handleChangeNeigh.bind(_this);
+    _this.handleChangeMiles = _this.handleChangeMiles.bind(_this);
+    _this.handleChangeSpeed = _this.handleChangeSpeed.bind(_this);
+    _this.handleChangeWeekdayTimes = _this.handleChangeWeekdayTimes.bind(_this);
+    _this.handleChangeWeekendTimes = _this.handleChangeWeekendTimes.bind(_this);
+    _this.handleChangePhone = _this.handleChangePhone.bind(_this);
+    return _this;
+  }
+
+  _createClass(CreateProfileForm, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var city_dropdown = this.getCityDropdown();
+      var neighborhood_dropdown = this.getNeighborhoodDropdown();
+      var miles_dropdown = this.getMilesDropdown();
+      var speed_dropdown = this.getSpeedDropdown();
+      var time_dropdown = this.getTimeDropdown();
+      console.log('this.state', this.state);
+      return _react2.default.createElement(
+        _semanticUiReact.Form,
+        { onSubmit: function onSubmit(evt) {
+            return _this2.props.handleSubmit(evt, _this2.state, _this2.props.user);
+          } },
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Edit Your Profile:'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Profile Information'
+        ),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Input, label: 'First Name', value: this.state.firstName, onChange: this.handleChangeFirstName }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Input, label: 'Last Name', value: this.state.lastName, onChange: this.handleChangeLastName }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: 'Age', value: this.state.age, onChange: this.handleChangeAge }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Input, label: 'Phone Number', value: this.state.phone, onChange: this.handleChangePhone }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Running Preferences'
+        ),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Dropdown, label: 'City', value: this.state.city, selectOnBlur: false, options: city_dropdown, onChange: this.handleChangeCity }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Preferred Neighborhoods', value: this.state.prefNeighborhoods, fluid: true, multiple: true, selection: true, placeholder: 'Choose Neighborhoods', selectOnBlur: false, options: neighborhood_dropdown, onChange: this.handleChangeNeigh }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Dropdown, label: 'Preferred Distance (miles)',
+          value: '' + this.state.prefDist,
+          selectOnBlur: false, options: miles_dropdown, onChange: this.handleChangeMiles }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { required: true, control: _semanticUiReact.Dropdown, label: 'Preferred Speed (min per mile)', value: this.state.prefSpeed, selectOnBlur: false, options: speed_dropdown, onChange: this.handleChangeSpeed }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Time Preferences'
+        ),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Weekday Times', value: this.state.prefWeekdayTime, selectOnBlur: false, fluid: true, multiple: true, selection: true, options: time_dropdown, onChange: this.handleChangeWeekdayTimes }),
+        _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Dropdown, label: 'Weekend Times', value: this.state.prefWeekendTime, fluid: true, multiple: true, selection: true, placeholder: 'Choose Time of Day', selectOnBlur: false, options: time_dropdown, onChange: this.handleChangeWeekendTimes }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          _semanticUiReact.Form.Field,
+          null,
+          _react2.default.createElement(
+            _semanticUiReact.Button,
+            { primary: true, type: 'submit' },
+            'Submit',
+            _react2.default.createElement(_semanticUiReact.Icon, { name: 'right chevron' })
+          )
+        )
+      );
+    }
+  }, {
+    key: 'getCityDropdown',
+    value: function getCityDropdown() {
+      return this.props.cities.map(function (city) {
+        return { key: city.id, value: city.name, text: city.name };
+      });
+    }
+  }, {
+    key: 'getNeighborhoodDropdown',
+    value: function getNeighborhoodDropdown() {
+      var dropdown = this.state.neighborhoods.map(function (neighborhood) {
+        return {
+          key: neighborhood.id,
+          value: neighborhood.name,
+          text: neighborhood.name
+        };
+      });
+      return dropdown;
+    }
+  }, {
+    key: 'getMilesDropdown',
+    value: function getMilesDropdown() {
+      var miles = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '10+'];
+      return miles.map(function (mile) {
+        return {
+          key: mile,
+          value: mile,
+          text: mile
+        };
+      });
+    }
+  }, {
+    key: 'getSpeedDropdown',
+    value: function getSpeedDropdown() {
+      var speeds = ['<6', '6-7', '7-8', '8-9', '9-10', '10-11', '11-12', '>12'];
+      return speeds.map(function (speed) {
+        return {
+          key: speed,
+          value: speed,
+          text: speed
+        };
+      });
+    }
+  }, {
+    key: 'getTimeDropdown',
+    value: function getTimeDropdown() {
+      var times = ['Early Morning', 'Morning', 'Mid-day', 'Afternoon', 'Evening', 'Late Night'];
+      return times.map(function (time) {
+        return {
+          key: time,
+          value: time,
+          text: time
+        };
+      });
+    }
+  }, {
+    key: 'handleChangeFirstName',
+    value: function handleChangeFirstName(evt, data) {
+      this.setState({ firstName: data.value });
+    }
+  }, {
+    key: 'handleChangeLastName',
+    value: function handleChangeLastName(evt, data) {
+      this.setState({ lastName: data.value });
+    }
+  }, {
+    key: 'handleChangeAge',
+    value: function handleChangeAge(evt, data) {
+      this.setState({ age: data.value });
+    }
+  }, {
+    key: 'handleChangeCity',
+    value: function handleChangeCity(evt, data) {
+      var city = this.props.cities.filter(function (city) {
+        return city.name === data.value;
+      });
+      this.setState({ city: data.value, neighborhoods: city[0].neighborhoods });
+    }
+  }, {
+    key: 'handleChangeNeigh',
+    value: function handleChangeNeigh(evt, data) {
+      this.setState({ prefNeighborhoods: data.value });
+    }
+  }, {
+    key: 'handleChangeMiles',
+    value: function handleChangeMiles(evt, data) {
+      this.setState({ prefDist: data.value });
+    }
+  }, {
+    key: 'handleChangeSpeed',
+    value: function handleChangeSpeed(evt, data) {
+      this.setState({ prefSpeed: data.value });
+    }
+  }, {
+    key: 'handleChangeWeekdayTimes',
+    value: function handleChangeWeekdayTimes(evt, data) {
+      this.setState({ prefWeekdayTime: data.value });
+    }
+  }, {
+    key: 'handleChangeWeekendTimes',
+    value: function handleChangeWeekendTimes(evt, data) {
+      this.setState({ prefWeekendTime: data.value });
+    }
+  }, {
+    key: 'handleChangePhone',
+    value: function handleChangePhone(evt, data) {
+      this.setState({ phone: data.value });
+    }
+  }]);
+
+  return CreateProfileForm;
+}(_react.Component);
+
+var mapState = function mapState(state) {
+  return {
+    cities: state.cities,
+    user: state.user,
+    neighborhoods: state.neighborhoods
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    handleSubmit: function handleSubmit(evt, data, user) {
+      dispatch((0, _store.updateProfile)(data, user));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(CreateProfileForm);
+
+/***/ }),
+/* 1175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchNeighborhoods = fetchNeighborhoods;
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case GET_NEIGHBORHOODS:
+      return action.neighborhoods;
+    default:
+      return state;
+  }
+};
+
+var _axios = __webpack_require__(58);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _history = __webpack_require__(28);
+
+var _history2 = _interopRequireDefault(_history);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * ACTION TYPES
+ */
+var GET_NEIGHBORHOODS = 'GET_NEIGHBORHOODS';
+
+/**
+ * ACTION CREATORS
+ */
+var getNeighborhoods = function getNeighborhoods(neighborhoods) {
+  return { type: GET_NEIGHBORHOODS, neighborhoods: neighborhoods };
+};
+
+/**
+ * THUNK CREATORS
+ */
+function fetchNeighborhoods(cityName) {
+
+  return function thunk(dispatch) {
+    return _axios2.default.put('/api/cities/neighborhoods', { cityName: cityName }).then(function (res) {
+      return res.data;
+    }).then(function (neighborhoods) {
+      dispatch(getNeighborhoods(neighborhoods));
+    });
+  };
+}
+
+/**
+ * REDUCER
+ */
 
 /***/ })
 /******/ ]);

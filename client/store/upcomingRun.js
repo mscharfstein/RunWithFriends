@@ -45,6 +45,16 @@ export function markAsComplete(runId) {
   }
 }
 
+export function joinUpcomingRun(runId, profileId) {
+  return function thunk(dispatch) {
+    return axios.put(`/api/runs/upcoming/${runId}/join`, {profileId})
+      .then(res => res.data)
+      .then(run => {
+        dispatch(setRun(run))
+      })
+  }
+}
+
 /**
  * REDUCER
  */

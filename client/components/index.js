@@ -18,4 +18,5 @@ export {default as IncomingRuns} from './IncomingRuns'
 export {default as PastRuns} from './PastRuns'
 export {default as RateRun} from './RateRun'
 export {default as Profile} from './Profile'
+export {default as EditProfile} from './EditProfile'
 

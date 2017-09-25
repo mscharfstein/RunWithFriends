@@ -20,13 +20,6 @@ const Run = db.define('run', {
   status: {
     type: Sequelize.STRING
   },
-  rating: {
-    type: Sequelize.INTEGER,
-    validate: {
-      min: 1,
-      max: 5
-    }
-  },
   neighborhood: {
     type: Sequelize.STRING
   },

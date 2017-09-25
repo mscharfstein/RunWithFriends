@@ -14,20 +14,48 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:userId', (req, res, next) => {
-  const findUserPromise = User.findById(req.params.userId)
-  const createProfPromise = Profile.create(req.body)
+  User.findById(req.params.userId)
+  .then(user => {
+    if (user.profileId) {
+      Profile.update(
+        req.body,
+        {where: {id: user.profileId}}
+      )
+      .then(profile => {
+        User.findById(user.id)
+        .then(user => res.json(user))
+      })
+      .catch(next)
+    }
 
-  return Promise.all([findUserPromise, createProfPromise])
-    .then(promises => {
-      const user = promises[0]
-      const profile = promises[1]
-      return user.setProfile(profile)
-        .then(user => {
-          return User.findById(user.id)
-          .then(updatedUser => {
-            res.json(updatedUser)
+    else {
+       Profile.create(req.body)
+        .then(profile => {
+            user.setProfile(profile)
+            .then(user => {
+              return User.findById(user.id)
+              .then(updatedUser => {
+                res.json(updatedUser)
+            })
           })
         })
-    })
-    .catch(next)
+    }
+  })
+  .catch(next)
+
+  // const createProfPromise = Profile.create(req.body)
+
+  // return Promise.all([findUserPromise, createProfPromise])
+  //   .then(promises => {
+  //     const user = promises[0]
+  //     const profile = promises[1]
+  //     return user.setProfile(profile)
+  //       .then(user => {
+  //         return User.findById(user.id)
+  //         .then(updatedUser => {
+  //           res.json(updatedUser)
+  //         })
+  //       })
+  //   })
+  //   .catch(next)
 })

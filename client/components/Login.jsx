@@ -61,7 +61,7 @@ class Login extends Component {
                 </Link>
                 {this.props.error && this.props.error.response && <div> {this.props.error.response.data} </div>}
                 </Form>
-                or<a href='/auth/google'> Sign Up with Google</a>
+                or<a href='/auth/google'> Sign Up or Log in with Google</a>
               </Segment>
             </Segment.Group>
           </Grid.Column>

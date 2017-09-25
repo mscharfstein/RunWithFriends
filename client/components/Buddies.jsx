@@ -10,9 +10,7 @@ import { Button, Card, Header, Image, Grid, Container } from 'semantic-ui-react'
 class Buddies extends Component {
 
   renderBuddies() {
-    console.log('rendering buddies', this.props.buddies)
     return _.map(_.filter(this.props.buddies), buddy=>{
-    //return _.map(this.props.patients, patient=>{
       return <User key={buddy.id} buddy={buddy}/>
     });
   }

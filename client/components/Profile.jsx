@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Grid, Container, Menu} from 'semantic-ui-react'
 import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun, ProfileInfo} from './index'
-import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
+import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun, ProfileInfo, EditProfile} from './index'
+import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns, fetchNeighborhoods} from '../store'
 /**
  * COMPONENT
  */
@@ -12,18 +12,17 @@ import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../
 export class Profile extends Component {
 
   componentDidMount() {
-    console.log('mounting', this.props.user.profileId)
-    this.props.loadInitialData(this.props.user.profileId)
+    this.props.loadInitialData(this.props.user.profile)
   }
 
   render() {
     return (
       <Container fluid>
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
-        <Grid.Column width={6} className='patient-column'>
-
+        <Grid.Column width={6} className='nurse-column'>
+          <EditProfile />
         </Grid.Column>
-        <Grid.Column width={10} className='nurse-column'>
+        <Grid.Column width={10} className='patient-column'>
           <PastRuns />
         </Grid.Column>
       </Grid>
@@ -42,15 +41,16 @@ const mapState = (state) => {
     incomingRequests: state.incomingRequests,
     upcomingRun: state.upcomingRun,
     pastRuns: state.pastRuns,
-    allRuns: state.allRuns
+    allRuns: state.allRuns,
+    neighborhoods: state.neighborhoods
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData(profileId) {
-      console.log('fetcthing with profid', profileId)
-      dispatch(fetchPastRuns(profileId))
+    loadInitialData(profile) {
+      dispatch(fetchPastRuns(profile.id))
+      dispatch(fetchNeighborhoods(profile.city))
     }
   }
 }

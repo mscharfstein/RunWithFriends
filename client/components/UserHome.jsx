@@ -15,15 +15,15 @@ export class UserHome extends Component {
     this.props.loadInitialData(this.props.user.profileId)
   }
 
-  console.log(Object.keys(this.props.upcomingRun).length && new Date(this.props.upcomingRun.date) > Date.now())
   render() {
+
     return (
       <Container fluid>
       {this.props.incomingRequests.length &&
           <ScrollingModal header="You Have An Incoming Run Request!" content={<IncomingRuns run={this.props.incomingRequests[0]}/>} />
       }
-      {Object.keys(this.props.upcomingRun).length && new Date(this.props.upcomingRun.date) > Date.now() &&
-        <ScrollingModal header={'How was your run?'} content={<RateRun run={this.props.upcomingRun}/>} />
+      {new Date(Date.now()) > new Date(this.props.upcomingRun.date) &&
+        <ScrollingModal header={'How was your run?'} content={<RateRun run={this.props.upcomingRun} profileId={this.props.user.profileId}/>} />
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
         <Grid.Column width={10} className='patient-column'>

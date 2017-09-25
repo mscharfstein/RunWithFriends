@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, Dropdown, Grid, Icon, Image, Label, List, Statistic} from 'semantic-ui-react'
 import _ from 'lodash';
+import history from '../history'
+import {addBuddyToRunRequest, joinUpcomingRun, text} from '../store'
 
 class Run extends Component {
   constructor(props) {
@@ -12,31 +14,31 @@ class Run extends Component {
     let header = ''
     let runParticipants = ''
     let yourRunDetails = {}
+
+    const partners = this.props.run.profiles.filter(profile => {
+      return +profile.id !== +this.props.profileId
+    })
+
+    const partnersNames = partners.map(partner => {
+      return `${partner.firstName} ${partner.lastName}`
+    })
+
     // change this to loop through the profiles in the run
     if (this.props.yourRun) {
-      console.log(this.props.run)
-      const partners = this.props.run.profiles.map(profile => {
-        if (+profile.id !== +this.props.profileId)
-        return `${profile.firstName} ${profile.lastName}`
-        return ''
-      })
-      runParticipants = `Partner(s): ${partners.join("& ")}`
-      header = `Run with ${partners.join(" & ")} on ${new Date(this.props.run.date).toDateString()}`
+
+      runParticipants = `Partner(s): ${partnersNames.join(" & ")}`
+      header = `Run with ${partnersNames.join(" & ")} on ${new Date(this.props.run.date).toDateString()}`
       const yourRunProfile = this.props.run.profiles.filter(profile => {
         return +profile.id === +this.props.profileId
       })
-      console.log('yourrunprofile', yourRunProfile)
       yourRunDetails = yourRunProfile[0].runUserDetails
-      console.log('yourRunDetails', yourRunDetails)
     }
 
     // change this to loop through the profiles on the run
     else {
-      const participants = this.props.run.profiles.map(profile => {
-        return `${profile.firstName} ${profile.lastName}`
-      })
 
-      runParticipants = `Participants: ${participants.join("& ")}`
+      runParticipants = `Participants: ${partnersNames.join(" & ")}`
+
       header = `Upcoming Run in ${this.props.run.neighborhood} on ${new Date(this.props.run.date).toDateString()}`
     }
 
@@ -69,7 +71,7 @@ class Run extends Component {
               {
                 !this.props.yourRun &&
                 <div className='join-run'>
-                  <Button color="green">+</Button>
+                  <Button onClick={(evt, data)=> this.props.handleJoinRun(evt, data, partners, this.props.run, this.props.profile)} color="green">+</Button>
                 </div>
               }
             </Card.Description>
@@ -79,5 +81,18 @@ class Run extends Component {
   }
 }
 
+const mapDispatch = (dispatch) => {
+  return {
+    handleJoinRun(evt, data, partners, run, profile) {
+      dispatch(joinUpcomingRun(run.id, profile.id))
 
-export default Run;
+      partners.map(partner => {
+        dispatch(text(partner.phone, `${profile.firstName} ${profile.lastName} will join your run on ${new Date(run.date).toDateString()}!`))
+      })
+      history.push('/home')
+    }
+  }
+}
+
+export default connect(null, mapDispatch)(Run)
+

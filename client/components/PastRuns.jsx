@@ -11,7 +11,8 @@ class PastRuns extends Component {
   render() {
     return (
       <div>
-        <Header as='h3' textAlign='center'>Your Past Runs</Header>
+        <Header as='h2' textAlign='center'>Your Past Runs</Header>
+
         {!!this.props.pastRuns.length &&
         <Card.Group itemsPerRow='2'>
           {this.props.pastRuns.map(run => {
@@ -20,7 +21,7 @@ class PastRuns extends Component {
         </Card.Group>
         }
         {
-          !this.props.pastRuns.length && "You haven't gone on any runs yet. Request a running buddy to experience the joy of running with friends!"
+          !this.props.pastRuns.length && <h3> You haven't gone on any runs yet. Request a running buddy to experience the joy of running with friends! </h3>
         }
       </div>
     );
@@ -34,5 +35,4 @@ function mapStatetoProps(state){
   }
 }
 
-//wires up fetchNurses to be a prop as action creator for component
 export default connect(mapStatetoProps)(PastRuns)
