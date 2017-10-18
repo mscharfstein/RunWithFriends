@@ -7,8 +7,6 @@ import CreateProfileForm from './CreateProfileForm.jsx'
  */
 export default class CreateProfile extends Component {
   render() {
-    console.log("in here")
-
     return (
       <ScrollingModal header="Create Your Profile!" content={<CreateProfileForm />} btnMessage="Get Running!"/>
     )

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Link, NavLink } from 'react-router-dom'
+import { withRouter, NavLink } from 'react-router-dom'
 import { logout } from '../store'
-import { Container, Menu, Grid } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -43,7 +43,6 @@ class Main extends Component {
           }
         </Menu>
       </div>
-
     )
   }
 }

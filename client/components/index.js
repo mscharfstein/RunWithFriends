@@ -5,7 +5,6 @@
  */
 export {default as Main} from './Main.jsx'
 export {default as UserHome} from './UserHome.jsx'
-//export {Login, Signup} from './AuthForm.jsx'
 export {default as CreateProfile} from './CreateProfile.jsx'
 export {default as Login} from './Login.jsx'
 export {default as RequestBuddyForm} from './RequestBuddyForm.jsx'

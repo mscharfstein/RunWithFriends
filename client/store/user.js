@@ -44,7 +44,6 @@ export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
       .then(res => {
-        console.log('removing user')
         dispatch(removeUser())
         history.push('/login')
       })
@@ -54,9 +53,8 @@ export function updateProfile(profile, user) {
   return function thunk(dispatch) {
     return axios.post(`/api/users/${user.id}`, profile)
       .then(res => res.data)
-      .then(user => {
-        console.log('user', user)
-        dispatch(setProfile(user));
+      .then(retUser => {
+        dispatch(setProfile(retUser));
       })
   }
 }

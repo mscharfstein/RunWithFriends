@@ -43,19 +43,4 @@ router.post('/:userId', (req, res, next) => {
   })
   .catch(next)
 
-  // const createProfPromise = Profile.create(req.body)
-
-  // return Promise.all([findUserPromise, createProfPromise])
-  //   .then(promises => {
-  //     const user = promises[0]
-  //     const profile = promises[1]
-  //     return user.setProfile(profile)
-  //       .then(user => {
-  //         return User.findById(user.id)
-  //         .then(updatedUser => {
-  //           res.json(updatedUser)
-  //         })
-  //       })
-  //   })
-  //   .catch(next)
 })

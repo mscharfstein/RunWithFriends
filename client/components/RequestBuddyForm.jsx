@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import { findBuddies, addRequestedRun } from '../store'
 import history from '../history'
 import {NavLink} from 'react-router-dom'
-//import DatePicker from 'react-datepicker';
+
 import moment from 'moment';
 
 export class RequestBuddyForm extends Component {
   constructor(props) {
     super(props)
+
     // maintain local state for input while writing
     this.state = {
       city: '',
@@ -44,17 +45,14 @@ export class RequestBuddyForm extends Component {
         <h4>Where are you running?</h4>
         <Form.Field control={Dropdown} label="City" placeholder="Choose City" selectOnBlur={false} options={city_dropdown} onChange={this.handleChangeCity} />
         <Form.Field control={Dropdown} label="Neighborhood" placeholder="Choose Neighborhood" selectOnBlur={false} options={neighborhood_dropdown} onChange={this.handleChangeNeigh} />
-        <br>
-        </br>
+        <br />
 
         <h4>How far and how fast?</h4>
         <Form.Field control={Input} label="Distance (in miles)" placeholder="4" onChange={this.handleChangeMiles} />
         <Form.Field control={Input} label="Speed (min per mile)" placeholder="9:30" onChange={this.handleChangeSpeed} />
-        <br>
-        </br>
+        <br />
 
         <h4>When you are going?</h4>
-        {/*add calendar api?*/}
         <Form.Field inline control={Input} label="Date" placeholder={new Date(Date.now()).toDateString()} onChange={this.handleChangeDate} />
         <Form.Group inline>
         <Form.Field control={Input} label="Time" placeholder="7:45" onChange={this.handleChangeTime} />

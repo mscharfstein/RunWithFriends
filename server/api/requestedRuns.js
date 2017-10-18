@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Profile, Run, RequestedRun } = require('../db/models')
+const { RequestedRun } = require('../db/models')
 const sendText = require('../sendText')
 module.exports = router
 
@@ -46,6 +46,6 @@ router.put('/', (req, res, next) => {
     })
 
   function getDayOfWeek(dayIndex) {
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return days[dayIndex];
   }

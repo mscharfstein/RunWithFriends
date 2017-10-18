@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, Dropdown, Grid, Icon, Image, Label, List, Statistic} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import _ from 'lodash';
 import history from '../history'
-import {addBuddyToRunRequest, createRun, deleteRequest, setIncomingReq, text} from '../store'
+import { createRun, deleteRequest, setIncomingReq, text } from '../store'
+import { Icon } from 'semantic-ui-react'
 
 class IncomingRuns extends Component {
   constructor(props) {
@@ -13,24 +14,24 @@ class IncomingRuns extends Component {
   render() {
     return (
       <div>
-      <h3> <Icon> <img src='/favicon.ico' width="25px"/> </Icon> {this.props.run.profile.firstName + ' ' + this.props.run.profile.lastName} wants to run with you!</h3>
+        <h3> <Icon> <img src='/favicon.ico' width="25px" /> </Icon> {this.props.run.profile.firstName + ' ' + this.props.run.profile.lastName} wants to run with you!</h3>
         <h4>Run details:</h4>
         <div>
-        Neighborhood: {this.props.run.neighborhood}
+          Neighborhood: {this.props.run.neighborhood}
         </div>
         <div>
-        Desired Distance: {this.props.run.dist} miles
+          Desired Distance: {this.props.run.dist} miles
         </div>
         <div>
-        Desired Speed: {this.props.run.speed} minutes per mile
+          Desired Speed: {this.props.run.speed} minutes per mile
         </div>
         <div>
-        Desired Time: {new Date(this.props.run.date).toDateString()}, {this.props.run.time}
+          Desired Time: {new Date(this.props.run.date).toDateString()}, {this.props.run.time}
         </div>
         <br>
         </br>
-        <Button className="btn" color="green" size="small" onClick={(evt)=>this.props.handleAccept(evt, this.props.run, this.props.user.profile)}>Accept!</Button>
-        <Button className="btn" color="grey" size="small" onClick={(evt)=>this.props.handleDecline(evt, this.props.run, this.props.user.profile)}>Sorry, can't make it</Button>
+        <Button className="btn" color="green" size="small" onClick={(evt) => this.props.handleAccept(evt, this.props.run, this.props.user.profile)}>Accept!</Button>
+        <Button className="btn" color="grey" size="small" onClick={(evt) => this.props.handleDecline(evt, this.props.run, this.props.user.profile)}>Sorry, can't make it</Button>
       </div>
     );
   }

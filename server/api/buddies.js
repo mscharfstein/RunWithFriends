@@ -1,11 +1,10 @@
 const router = require('express').Router()
-const { User, Profile } = require('../db/models')
+const { Profile } = require('../db/models')
 module.exports = router
 
 // need a lot more logic here - do this tonight
 router.put('/find', (req, res, next) => {
 
-  console.log('in find buddies route')
   let typeOfDay = 'prefWeekdayTime';
   let runDate = new Date(req.body.date)
   if (runDate.getDay() === 0 || runDate.getDay() === 6) typeOfDay = 'prefWeekendTime';
@@ -13,7 +12,6 @@ router.put('/find', (req, res, next) => {
   const time = findTime(req.body.time, req.body.AMPM)
   const speedInt = findSpeedInterval(req.body.prefSpeed)
 
-  console.log('req.body', req.body, time, speedInt)
   Profile.findAll({
     where: {
       city: req.body.city,

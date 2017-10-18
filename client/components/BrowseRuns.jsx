@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
-import  Run from './Run';
-import { Button, Card, Header, Image, Grid } from 'semantic-ui-react';
-import {fetchAllRuns} from '../store'
+
+import { Card, Header } from 'semantic-ui-react';
+
+import Run from './Run';
+import { fetchAllRuns } from '../store'
 
 class BrowseRuns extends Component {
-
   render() {
     return (
       <div>
         <Header as='h2' textAlign='center'>All Upcoming Runs</Header>
 
         {!!this.props.allRuns.length &&
-        <Card.Group itemsPerRow='2'>
-          {_.map(this.props.allRuns, run => {
-            return <Run key={run.id} run={run} profile={this.props.user.profile} yourRun={false}/>
-          })}
-        </Card.Group>
+          <Card.Group itemsPerRow='2'>
+            {_.map(this.props.allRuns, run => {
+              return <Run key={run.id} run={run} profile={this.props.user.profile} yourRun={false} />
+            })}
+          </Card.Group>
         }
         {
           !this.props.allRuns.length &&
@@ -29,7 +29,7 @@ class BrowseRuns extends Component {
   }
 }
 
-function mapStatetoProps(state){
+function mapStatetoProps(state) {
   return {
     allRuns: state.allRuns,
     user: state.user
@@ -39,7 +39,7 @@ function mapStatetoProps(state){
 function mapDispatchToProps(dispatch) {
   return {
     loadAllRuns() {
-      dispatch(fetchAllRuns(profileId)) // get all runs besides your own
+      dispatch(fetchAllRuns()) // get all runs besides your own
     }
   }
 }

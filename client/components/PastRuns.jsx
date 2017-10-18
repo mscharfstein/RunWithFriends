@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Link } from 'react-router-dom';
+
 import  Run from './Run';
-import { Button, Card, Header, Image, Grid } from 'semantic-ui-react';
-import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
+
+import { Card, Header } from 'semantic-ui-react';
 
 class PastRuns extends Component {
 

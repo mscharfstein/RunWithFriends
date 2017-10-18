@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Grid, Container, Menu} from 'semantic-ui-react'
-import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun, ProfileInfo, EditProfile} from './index'
-import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns, fetchNeighborhoods, me} from '../store'
+
+import {Grid, Container} from 'semantic-ui-react'
+
+import {PastRuns, EditProfile} from './index'
+import {fetchPastRuns, fetchNeighborhoods} from '../store'
+
 /**
  * COMPONENT
  */
-
 export class Profile extends Component {
 
   componentWillUpdate(nextProps) {
@@ -50,8 +50,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData(profile) {
-      //dispatch(me())
-      console.log('profile', profile)
 
       if (profile) {
         dispatch(fetchPastRuns(profile.id))
