@@ -67,10 +67,8 @@ router.get('/upcoming/:profileId', (req, res, next) => {
 router.put('/upcoming/:runId', (req, res, next) => {
   Run.findById(req.params.runId)
     .then(run => {
-      console.log('run', run.numberOfRatings)
       const currRatings = +run.numberOfRatings
       if (+run.numberOfRatings + 1 === run.profiles.length) {
-        console.log('currRatings', currRatings)
         return run.update(
           {numberOfRatings: +currRatings + 1, status: "Completed"})
       }

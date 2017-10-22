@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Grid, Container, Menu} from 'semantic-ui-react'
-import {withRouter, Link, NavLink} from 'react-router-dom'
-import {Main, RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, PastRuns, RateRun, CreateProfile} from './index'
+import {Grid, Container} from 'semantic-ui-react'
+import {RequestBuddyForm, BrowseRuns, ScrollingModal, IncomingRuns, RateRun, CreateProfile} from './index'
 import {fetchRequests, fetchPastRuns, fetchUpcomingRuns, fetchAllRuns} from '../store'
-import history from '../history'
 
 /**
  * COMPONENT
@@ -31,12 +29,12 @@ export class UserHome extends Component {
         <CreateProfile />
       }
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
-        <Grid.Column width={10} className='patient-column'>
+        <Grid.Column width={10} className='run-column'>
         {!!this.props.allRuns.length &&
           <BrowseRuns />
         }
         </Grid.Column>
-        <Grid.Column width={6} className='nurse-column'>
+        <Grid.Column width={6} className='big-column'>
           <RequestBuddyForm />
         </Grid.Column>
       </Grid>

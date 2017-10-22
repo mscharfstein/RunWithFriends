@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, Dropdown, Grid, Icon, Image, Label, List, Statistic} from 'semantic-ui-react'
-import _ from 'lodash';
+import { Button, Card, Icon } from 'semantic-ui-react'
 import history from '../history'
-import {addBuddyToRunRequest, joinUpcomingRun, text} from '../store'
+import {joinUpcomingRun, text} from '../store'
 
 class Run extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let header = ''
@@ -43,7 +39,7 @@ class Run extends Component {
     }
 
     return (
-        <Card fluid className='patient-card'>
+        <Card fluid className='run-card'>
           <Card.Content>
             <Card.Header>
               <Icon> <img src='/favicon.ico' width="25px"/> </Icon> {header}

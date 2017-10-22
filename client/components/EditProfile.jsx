@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form, Dropdown, Input, TextArea, Icon } from 'semantic-ui-react'
+import { Button, Form, Dropdown, Input, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { updateProfile } from '../store'
 

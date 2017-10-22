@@ -16,7 +16,6 @@ export function findBuddies(run) {
     return axios.put('/api/buddies/find', run)
       .then(res => res.data)
       .then(users => {
-        console.log('users', users)
         dispatch(setBuddies(users));
       })
   }

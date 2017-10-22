@@ -11,9 +11,8 @@ class User extends Component {
   }
 
   render() {
-    console.log('props', this.props)
     return (
-        <Card fluid className='patient-card'>
+        <Card fluid className='run-card'>
           <Card.Content>
             <Card.Header>
               <Icon name='user' /> {this.props.buddy.firstName + ' ' + this.props.buddy.lastName}

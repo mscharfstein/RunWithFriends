@@ -30,7 +30,6 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
-  console.log('req.user after logging out', req.user)
   res.redirect('/')
 })
 
@@ -39,4 +38,3 @@ router.get('/me', (req, res) => {
 })
 
 router.use('/google', require('./google'))
-//router.use('/facebook', require('./facebook'))

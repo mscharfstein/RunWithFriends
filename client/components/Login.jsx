@@ -45,8 +45,8 @@ class Login extends Component {
                     <label>Password</label>
                     <input name='password' type='password' placeholder='Password' onChange={this.handlePassword}/>
                   </Form.Field>
-                  <br>
-                  </br>
+                  <br />
+               
                   <Link to="/home">
                     <Button type="submit" color='teal' onClick={(evt)=>this.props.handleSubmit(evt,this.state, 'login')}>
                       Login

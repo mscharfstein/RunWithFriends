@@ -16,39 +16,39 @@
 }
 
 /*Columns*/
-.patient-column {
+.run-column {
   background-color: #eff8fb;
   height: 100%;
   overflow-y: scroll;
   padding: 1em 2em !important;
 }
 
-.patient-column, .nurse-column {
+.run-column, .big-column {
   height: 100%;
   overflow-y: scroll;
   padding: 1em 2em !important;
 }
 
-/*Patient*/
-.patient-card {
+/*run*/
+.run-card {
   padding: 1em !important;
 }
-.patient-card .content {
+.run-card .content {
   padding: 0px !important;
   position: relative;
 }
-.patient-card .content .description {
+.run-card .content .description {
   margin-bottom: 30px;
 }
-.patient-card .content .dropdown {
+.run-card .content .dropdown {
   position: absolute;
   bottom: 0;
   right: 0;
 }
-.patient-card .acuity-rating {
+.run-card .acuity-rating {
   text-align: center;
 }
-.patient-card .acuity-rating .label-text {
+.run-card .acuity-rating .label-text {
   font-size: 0.5em;
 }
 

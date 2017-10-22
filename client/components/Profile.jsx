@@ -19,12 +19,12 @@ export class Profile extends Component {
     return (
       <Container fluid style={{padding:"1em 2em"}}>
       <Grid columns={2} divided padded='horizontally' relaxed className='main-grid'>
-        <Grid.Column width={5} className='nurse-column'>
+        <Grid.Column width={5} className='big-column'>
         {this.props.user.id &&
           <EditProfile />
         }
         </Grid.Column>
-        <Grid.Column width={11} className='patient-column'>
+        <Grid.Column width={11} className='run-column'>
         {!!this.props.pastRuns.length &&
           <PastRuns />
         }
